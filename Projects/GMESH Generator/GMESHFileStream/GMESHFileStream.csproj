@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C53245C7-7C8B-4726-8D93-C88C90233C6F}</ProjectGuid>
+    <ProjectGuid>{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Decompose</RootNamespace>
-    <AssemblyName>Decompose</AssemblyName>
+    <RootNamespace>GMESHFileStream</RootNamespace>
+    <AssemblyName>GMESHFileStream</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,14 +44,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="OBJFile\" />
+    <Folder Include="XMLFile\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Geometry\Geometry.csproj">
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pentagon\" />
-    <Folder Include="Triangle\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Geometry\Geometry.csproj">
+      <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
+      <Name>Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMESHFileStream\GMESHFileStream.csproj">
+      <Project>{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}</Project>
+      <Name>GMESHFileStream</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
