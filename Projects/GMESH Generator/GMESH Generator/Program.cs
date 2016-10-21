@@ -54,7 +54,14 @@ namespace GMESH_Generator
             mesh3[ 3, 1 ] = new Geometry.Point.Point2D(205,198);
             mesh3[ 3, 2 ] = new Geometry.Point.Point2D(196,190);
             mesh3[ 3, 3 ] = new Geometry.Point.Point2D(183,178);
-                
+
+
+            AbstractMesh[] mesharray = new AbstractMesh[1];
+            mesharray[0] = mesh1;
+            AbstractMesh[] mesharray1 = new AbstractMesh[3];
+            mesharray1[0] = mesh2;
+            mesharray1[1] = mesh1;
+            mesharray1[2] = mesh3;
 
             IPoint point1= new Geometry.Point.Point2D(10, 35);
             IPoint point2 = new Geometry.Point.Point2D(25, 41);
