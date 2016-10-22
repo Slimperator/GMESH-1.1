@@ -27,9 +27,9 @@ namespace Geometry
     public abstract class AbstractMesh
     {
         protected IPoint[,] meshPoints;
-        protected int rows;
-        protected int colums;
-        public double sigma { get; set; }
+        public abstract int rows { get; protected set; }
+        public abstract int colums { get; protected set; }
+        public abstract double sigma { get; set; }
         public IPoint this[int i, int j]
         {
             get { return meshPoints[i, j]; }
