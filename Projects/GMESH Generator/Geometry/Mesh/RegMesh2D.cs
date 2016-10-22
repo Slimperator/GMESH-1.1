@@ -18,11 +18,13 @@ namespace Geometry
         public override int rows
         {
             get { return this.rows; }
+            protected set { this.rows = value; }
         }
 
         public override int colums
         {
             get { return this.colums; }
+            protected set { this.rows = value; }
         }
 
         public override double sigma
