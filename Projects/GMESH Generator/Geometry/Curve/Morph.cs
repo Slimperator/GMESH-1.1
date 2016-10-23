@@ -24,5 +24,15 @@ namespace Geometry.Curve
             IPoint B = b.getPoint(t);
             return new Point.Point2D(this.alpha * A.x + (1 - this.alpha) * B.x, this.alpha * A.y + (1 - this.alpha) * B.y);
         }
+
+        public IPoint[] cutPoints
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void slittingCurve(double lenght)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
