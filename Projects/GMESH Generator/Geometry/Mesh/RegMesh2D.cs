@@ -7,7 +7,6 @@ namespace Geometry
 {
     public class RegMesh2D: AbstractMesh
     {
-        private double sigma;
         private int size;
         public RegMesh2D(int size, int sigma)
         {
