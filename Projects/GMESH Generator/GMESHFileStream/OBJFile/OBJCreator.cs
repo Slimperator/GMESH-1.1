@@ -32,7 +32,7 @@ namespace GMESHFileStream.OBJFile
                     sw.WriteLine("g all");
                     sw.WriteLine("s 1");
 
-                    for (int k = 0; k < mesh[0].rows * mesh[0].colums - 1; k++)
+                    for (int k = 1; k < mesh[0].rows * mesh[0].colums ; k++)
                     {
                         sw.Write("l");
                         sw.Write(Convert.ToString(k));

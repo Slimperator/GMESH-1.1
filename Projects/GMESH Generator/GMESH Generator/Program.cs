@@ -16,16 +16,16 @@ namespace GMESH_Generator
         static void Main(string[] args)
         {
             string path = Directory.GetCurrentDirectory();
-            path = System.IO.Path.Combine(path, "ObjExample2.obj");
+            path = System.IO.Path.Combine(path, "ObjExample5.obj");
             AbstractMesh mesh1 = new RegMesh2D(2, 0);
             AbstractMesh mesh2 = new RegMesh2D(3, 0);
             AbstractMesh mesh3 = new RegMesh2D(4, 0);
             //сетки для тестирования  
           // сетка mesh1
-            mesh1[ 0, 0 ] = new Geometry.Point.Point2D(21,24);
-            mesh1[ 0, 1 ] = new Geometry.Point.Point2D(25,28);
-            mesh1[ 1, 0 ] = new Geometry.Point.Point2D(30,34);
-            mesh1[ 1, 1 ] = new Geometry.Point.Point2D(36,40);
+            mesh1[ 0, 0 ] = new Geometry.Point.Point2D(0.0,0.0);
+            mesh1[ 0, 1 ] = new Geometry.Point.Point2D(0.0,1.0);
+            mesh1[ 1, 0 ] = new Geometry.Point.Point2D(1.0,0.0);
+            mesh1[ 1, 1 ] = new Geometry.Point.Point2D(1.0,1.0);
 
           // сетка mesh2
             mesh2[ 0, 0 ] = new Geometry.Point.Point2D(50,55);
