@@ -9,10 +9,11 @@ namespace Geometry.Curve
     {
         private IPoint newA, newB;
         private ICurve curve;
-        public IPoint[] cutPoints
+        private IPoint[] cutPoints;
+
+        IPoint[] ICurve.cutPoints
         {
             get { return this.cutPoints; }
-            private set;
         }
         public Relocate(ICurve curve, IPoint newA, IPoint newB)
         {
