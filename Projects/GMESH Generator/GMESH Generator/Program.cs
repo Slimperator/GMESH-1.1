@@ -16,6 +16,7 @@ namespace GMESH_Generator
         static void Main(string[] args)
         {
             string path = Directory.GetCurrentDirectory();
+            path = System.IO.Path.Combine(path, "ObjExample2.obj");
             AbstractMesh mesh1 = new RegMesh2D(2, 0);
             AbstractMesh mesh2 = new RegMesh2D(3, 0);
             AbstractMesh mesh3 = new RegMesh2D(4, 0);
@@ -76,6 +77,9 @@ namespace GMESH_Generator
             {curve,curve1,curve2};
 
             IContour k = new Geometry.Contour.Contour(curvs);
+            IWriter test = new GMESHFileStream.OBJFile.OBJCreator();
+            test.write(path, mesharray);
+    
     
         }
     }

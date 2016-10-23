@@ -7,6 +7,7 @@ namespace Geometry
 {
     public class RegMesh2D: AbstractMesh
     {
+        private double Sigma;
         private int size;
         public RegMesh2D(int size, int sigma)
         {
@@ -31,11 +32,11 @@ namespace Geometry
         {
             get
             {
-                return this.sigma;
+                return this.Sigma;
             }
             set
             {
-                this.sigma = value;
+                this.Sigma = value;
             }
         }
     }
