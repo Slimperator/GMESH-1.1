@@ -36,7 +36,7 @@ namespace Geometry.Curve
             return length / Tools.length(curve);
         }
 
-        public IPoint[] slittingCurve(double lenght, ICurve curve)
+        public static IPoint[] slittingCurve(double lenght, ICurve curve)
         {
             return null;
         }
