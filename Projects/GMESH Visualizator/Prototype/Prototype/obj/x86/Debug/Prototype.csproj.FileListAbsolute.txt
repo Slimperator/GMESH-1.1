@@ -1,0 +1,17 @@
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\bin\Debug\Prototype.exe
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\bin\Debug\Prototype.pdb
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.Form1.resources
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.Properties.Resources.resources
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.exe
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.pdb
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\GMESH\Prototype\Prototype\obj\x86\Debug\Prototype.Form2.resources
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.exe
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.pdb
+d:\Дашкина папка\Prototype\Prototype\Prototype\bin\Debug\Prototype.exe
+d:\Дашкина папка\Prototype\Prototype\Prototype\bin\Debug\Prototype.pdb
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.csprojResolveAssemblyReference.cache
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.Form1.resources
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.Properties.Resources.resources
+d:\Дашкина папка\Prototype\Prototype\Prototype\obj\x86\Debug\Prototype.csproj.GenerateResource.Cache
