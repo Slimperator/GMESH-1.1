@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core.cs" />
+    <Compile Include="Pentagon\PentagonDecTetraAndTri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Triangle\TriangleDecompose.cs" />
   </ItemGroup>
@@ -58,9 +59,7 @@
       <Name>Geometry</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pentagon\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
