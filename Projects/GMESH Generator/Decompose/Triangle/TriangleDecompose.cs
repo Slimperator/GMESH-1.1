@@ -17,7 +17,7 @@ namespace Decompose.Triangle
         private IMeshGenerator gen; //заглушка
         private IGrade grade = new Analyzer.Grade.ArithmMeanGrade(); 
 
-        public IContour[] decomposed(IContour contour)
+        public IContour[] decompose(IContour contour)
         {
             Geometry.IPoint[] newPoints = FindCenters(contour, PART);  //пустой массив для середин линий
             Geometry.IPoint centre = FindTriangleCentre(newPoints); ;
