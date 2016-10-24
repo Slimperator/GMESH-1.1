@@ -15,7 +15,6 @@ namespace Geometry
     {
         IPoint[] cutPoints { get; }
         IPoint getPoint(double t);
-        void slittingCurve(double lenght);
     }
 
     public interface IContour
