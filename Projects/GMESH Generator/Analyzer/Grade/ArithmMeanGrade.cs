@@ -7,9 +7,8 @@ using Geometry.Curve;
 
 namespace Analyzer.Grade
 {
-    class ArithmMeanGrade:IGrade
+    public class ArithmMeanGrade:IGrade
     {
-
         public double calculate(Geometry.AbstractMesh mesh)
         {
             List<double> average = new List<double>(); //среднее
