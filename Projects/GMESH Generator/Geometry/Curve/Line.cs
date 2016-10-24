@@ -31,10 +31,5 @@ namespace Geometry.Curve
         {
             return new Point.Point2D((1 - t) * this.l1.x + t * l2.x, (1 - t) * this.l1.y + t * l2.y);
         }
-
-        public void slittingCurve(double lenght)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -30,10 +30,5 @@ namespace Geometry.Curve
             NewPoint.y += (1 - t) * (this.newA.y - A.y) + t * (this.newB.y - B.y);
             return NewPoint;
         }
-
-        public void slittingCurve(double lenght)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

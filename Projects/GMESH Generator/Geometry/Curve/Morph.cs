@@ -29,10 +29,5 @@ namespace Geometry.Curve
         {
             get { throw new NotImplementedException(); }
         }
-
-        public void slittingCurve(double lenght)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
