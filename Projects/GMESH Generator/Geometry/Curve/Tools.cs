@@ -36,14 +36,14 @@ namespace Geometry.Curve
             return length / Tools.length(curve);
         }
 
-        public static IPoint[] slittingCurve(double length, ICurve curve)
+        public static void slittingCurve(double length, ICurve curve)
         {
             List<IPoint> cutPoints = new List<IPoint>();
             for (; length < Tools.length(curve); length += length)
             {
                 cutPoints.Add(curve.getPoint(length));
             }
-            return cutPoints.ToArray();
+            curve.cutPoints = cutPoints.ToArray();
         }
     }
 }
