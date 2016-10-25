@@ -7,21 +7,33 @@ namespace Geometry.Contour
 {
     public class Contour:IContour
     {
-        private ICurve[] curves;
-
+        private ICurve[] Curves;
+        private double LenghtOfPart;
         public Contour(ICurve[] curves)
         {
-            this.curves = curves;
+            this.Curves = curves;
         }
 
         public int getSize()
         {
-            return curves.Length;
+            return Curves.Length;
         }
 
         public ICurve this[int i]
         {
-            get { return curves[i]; }
+            get { return Curves[i]; }
+        }
+
+        public double lenghtOfPart
+        {
+            get
+            {
+                return LenghtOfPart;
+            }
+            set
+            {
+                this.LenghtOfPart = value;
+            }
         }
     }
 }
