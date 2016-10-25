@@ -14,6 +14,7 @@ namespace Geometry.Curve
         IPoint[] ICurve.cutPoints
         {
             get { return this.cutPoints; }
+            set { this.cutPoints = value; }
         }
         public Relocate(ICurve curve, IPoint newA, IPoint newB)
         {

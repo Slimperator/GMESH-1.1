@@ -15,7 +15,7 @@ namespace Geometry.Curve
             {
                 throw new NotImplementedException();
             }
-            private set
+            set
             {
                 throw new NotImplementedException();
             }

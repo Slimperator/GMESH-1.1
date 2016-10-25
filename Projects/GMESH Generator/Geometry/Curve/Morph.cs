@@ -27,7 +27,11 @@ namespace Geometry.Curve
 
         public IPoint[] cutPoints
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set { this.cutPoints = value; }
         }
     }
 }
