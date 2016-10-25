@@ -43,13 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\GradAnalize.cs" />
+    <Compile Include="Commands\Open.cs" />
+    <Compile Include="Commands\Save.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Decompose\Decompose.csproj">
       <Project>{C53245C7-7C8B-4726-8D93-C88C90233C6F}</Project>
