@@ -13,12 +13,13 @@ namespace Geometry
 
     public interface ICurve
     {
-        IPoint[] cutPoints { get; }
+        IPoint[] cutPoints { get; set; }
         IPoint getPoint(double t);
     }
 
     public interface IContour
     {
+        double lenghtOfPart { get; set; }
         int getSize();
         ICurve this[int i] { get; }
     }
