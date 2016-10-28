@@ -15,4 +15,13 @@ namespace GMESHFileStream
     {
         int read(string filename, out IContour contour);
     }
+    public interface IPreprocessing
+    {
+        void convert(IReader reader, out IContour contour);
+    }
+
+    public interface IPostprocessing
+    {
+        void convert(IWriter writer, AbstractMesh[] meshs);
+    }
 }
