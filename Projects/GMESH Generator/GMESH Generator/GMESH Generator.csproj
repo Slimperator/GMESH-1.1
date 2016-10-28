@@ -73,10 +73,6 @@
       <Project>{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}</Project>
       <Name>GMESHFileStream</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parser\Parser.csproj">
-      <Project>{75EEA762-9EFD-4FFE-A650-FABEC42B7B93}</Project>
-      <Name>Parser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
