@@ -53,6 +53,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Analyzer\Analyzer.csproj">
+      <Project>{94B15790-A459-4317-B4F4-75DC5D639FE4}</Project>
+      <Name>Analyzer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Decompose\Decompose.csproj">
       <Project>{C53245C7-7C8B-4726-8D93-C88C90233C6F}</Project>
       <Name>Decompose</Name>
