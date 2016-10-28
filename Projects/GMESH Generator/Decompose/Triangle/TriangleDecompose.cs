@@ -11,10 +11,10 @@ namespace Decompose.Triangle
 {
     public class TriangleDecompose : IDecompose
     {
-        private Geometry.IPoint[] pointsOfcurve;
+        //private Geometry.IPoint[] pointsOfcurve;
         private const double PART = 0.5;
         private double Max = 0;
-        private IMeshGenerator gen; //заглушка
+        private IMeshGenerator gen = new Generator.Generator();
         private IGrade grade = new Analyzer.Grade.ArithmMeanGrade(); 
 
         public IContour[] decompose(IContour contour)
