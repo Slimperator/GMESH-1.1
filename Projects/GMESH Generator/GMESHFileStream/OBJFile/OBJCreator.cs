@@ -22,6 +22,7 @@ namespace GMESHFileStream.OBJFile
                         for (int j = 0; j < mesh[0].colums; j++)//колличество столбцов в матрице
                         {
                             sw.Write("v");
+                            sw.Write(" ");
                             sw.Write(Convert.ToString(mesh[0][i, j].x));
                             sw.Write(" ");
                             sw.Write(Convert.ToString(mesh[0][i, j].y));
@@ -32,31 +33,47 @@ namespace GMESHFileStream.OBJFile
                     sw.WriteLine("g all");
                     sw.WriteLine("s 1");
 
-                    for (int k = 0; k < mesh[0].rows * mesh[0].colums - 1; k++)
+                    for (int k = 1; k <= mesh[0].rows * mesh[0].colums - 1; k++)
                     {
-                        sw.Write("l");
-                        sw.Write(Convert.ToString(k));
-                        sw.Write(" ");
-                        sw.Write(Convert.ToString(k + 1));
-                        sw.WriteLine();
 
-                        sw.Write("l");
-                        sw.Write(Convert.ToString(k));
-                        sw.Write(" ");
-                        sw.Write(Convert.ToString(k + mesh[0].rows));
-                        sw.WriteLine();
 
-                        sw.Write("l");
-                        sw.Write(Convert.ToString(k + 1));
-                        sw.Write(" ");
-                        sw.Write(Convert.ToString(k + mesh[0].rows + 1));
-                        sw.WriteLine();
+                        if ((k % mesh[0].rows) == 0)
+                        {
+                            sw.Write("l");
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k));
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k + mesh[0].rows));
+                            sw.WriteLine();
+                        }
 
-                        sw.Write("l");
-                        sw.Write(Convert.ToString(k));
-                        sw.Write(" ");
-                        sw.Write(Convert.ToString(k + mesh[0].rows));
-                        sw.WriteLine();
+                        if (k > mesh[0].rows * mesh[0].colums - mesh[0].rows)
+                        {
+                            sw.Write("l");
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k));
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k + 1));
+                            sw.WriteLine();
+                        }
+
+                        if ((k < mesh[0].rows * mesh[0].colums - mesh[0].rows) && ((k % mesh[0].rows) != 0))
+                        {
+                            sw.Write("l");
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k));
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k + 1));
+                            sw.WriteLine();
+
+                            sw.Write("l");
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k));
+                            sw.Write(" ");
+                            sw.Write(Convert.ToString(k + mesh[0].rows));
+                            sw.WriteLine();
+                        }
+
 
 
                     }
