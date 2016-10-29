@@ -35,7 +35,6 @@ namespace Geometry.Curve
         {
             return length / Tools.length(curve);
         }
-
         public static void slittingCurve(double length, ICurve curve)
         {
             List<IPoint> cutPoints = new List<IPoint>();
@@ -44,6 +43,33 @@ namespace Geometry.Curve
                 cutPoints.Add(curve.getPoint(length));
             }
             curve.cutPoints = cutPoints.ToArray();
+        }
+        /// <summary>
+        /// Метод проверяет две кривые на равенство. В том числе, если кривая перевернута
+        /// </summary>
+        public static bool equalityCurves(ICurve curve1, ICurve curve2)
+        {
+            bool straight = true, forward = true;
+            if(curve1.cutPoints.Length != curve2.cutPoints.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < curve1.cutPoints.Length; i++)
+            {
+                if (curve1.cutPoints[i] != curve2.cutPoints[i])
+                {
+                    straight = false;
+                }
+                if (curve1.cutPoints[i] == curve2.cutPoints[curve2.cutPoints.Length - i])
+                {
+                    forward = false;
+                }
+                if (straight == false && forward == false)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
