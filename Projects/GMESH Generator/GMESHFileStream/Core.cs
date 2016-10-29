@@ -8,7 +8,7 @@ namespace GMESHFileStream
 {
     public interface IWriter
     {
-        int write(string filename, AbstractMesh[] mesh);
+        int write(string filename, AbstractMesh[] mesh, IContour[] Contours);
     }
 
     public interface IReader

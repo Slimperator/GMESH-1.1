@@ -10,7 +10,7 @@ namespace GMESHFileStream.OBJFile
     public class OBJCreator : IWriter
     {
 
-        public int write(string filename, AbstractMesh[] mesh)
+        public int write(string filename, AbstractMesh[] mesh, IContour[] Contours)
         {
 
             if (!File.Exists(filename))
