@@ -43,6 +43,7 @@ namespace Geometry.Curve
                 cutPoints.Add(curve.getPoint(length));
             }
             curve.cutPoints = cutPoints.ToArray();
+            curve.lenght = length;
         }
         /// <summary>
         /// Метод проверяет две кривые на равенство. В том числе, если кривая перевернута
