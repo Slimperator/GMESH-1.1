@@ -9,7 +9,7 @@ using Geometry.Contour;
 using Geometry.Curve;
 using Analyzer.Grade;
 
-namespace Solvers
+namespace Decompose.Pentagon
 {
     public class PentagonDecTetraAndTri : IDecompose
     {
@@ -36,7 +36,7 @@ namespace Solvers
                 // Треугольник
                 double contourGrade = 0;
                 //TODO: создать конкретные классы для IMeshGenerator
-                IMeshGenerator generator = null; // = new TriaMeshGen(10, 10);
+                IMeshGenerator generator = new Generator.Generator(); // = new TriaMeshGen(10, 10);
                 AbstractMesh mesh = generator.generate(contours[0]);
 
 
@@ -52,7 +52,7 @@ namespace Solvers
 
                 //TODO: создать конкретные классы для IMeshGenerator????
 
-                generator = null; // = new QuadCleverMeshGen(10, 10);
+                generator = new Generator.Generator(); // = new QuadCleverMeshGen(10, 10);
                 mesh = generator.generate(contours[1]);
 
                 //TODO: сделать класс ArithmMeanGrade пабликом???
