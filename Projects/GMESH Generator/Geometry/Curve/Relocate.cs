@@ -10,7 +10,18 @@ namespace Geometry.Curve
         private IPoint newA, newB;
         private ICurve curve;
         private IPoint[] cutPoints;
-
+        private double Lenght;
+        public double lenght
+        {
+            get
+            {
+                return this.Lenght;
+            }
+            set
+            {
+                this.Lenght = value;
+            }
+        }
         IPoint[] ICurve.cutPoints
         {
             get { return this.cutPoints; }

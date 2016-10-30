@@ -10,7 +10,19 @@ namespace Geometry.Curve
         private ICurve a;
         private ICurve b;
         private double alpha;
-
+        private IPoint[] CutPoints;
+        private double Lenght;
+        public double lenght
+        {
+            get
+            {
+                return this.Lenght;
+            }
+            set
+            {
+                this.Lenght = value;
+            }
+        }
         public Morph(ICurve a, ICurve b, double alpha)
         {
             this.a = a;
@@ -29,9 +41,12 @@ namespace Geometry.Curve
         {
             get
             {
-                throw new NotImplementedException();
+                return this.CutPoints;
             }
-            set { this.cutPoints = value; }
+            set 
+            { 
+                this.CutPoints = value; 
+            }
         }
     }
 }

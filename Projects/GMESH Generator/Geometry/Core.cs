@@ -15,6 +15,7 @@ namespace Geometry
     {
         IPoint[] cutPoints { get; set; }
         IPoint getPoint(double t);
+        double lenght { get; set; } //костыль обыкновенный. для обхода циклической зависимости. править во втором релизе
     }
 
     public interface IContour
