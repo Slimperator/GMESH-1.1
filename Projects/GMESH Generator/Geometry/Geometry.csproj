@@ -45,6 +45,7 @@
     <Compile Include="Curve\Line.cs" />
     <Compile Include="Curve\Morph.cs" />
     <Compile Include="Curve\Relocate.cs" />
+    <Compile Include="Curve\SubCurve.cs" />
     <Compile Include="Curve\Tools.cs" />
     <Compile Include="Mesh\RegMesh2D.cs" />
     <Compile Include="Core.cs" />

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\GradAnalize.cs" />
+    <Compile Include="Commands\MeshGenerate.cs" />
     <Compile Include="Commands\Open.cs" />
     <Compile Include="Commands\Save.cs" />
     <Compile Include="Core.cs" />
