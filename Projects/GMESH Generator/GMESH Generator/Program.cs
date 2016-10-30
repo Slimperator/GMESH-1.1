@@ -14,7 +14,36 @@ namespace GMESH_Generator
     {
         static void Main(string[] args)
         {
-            string path = Directory.GetCurrentDirectory();
+            Buffer buff = Buffer.getInstance();
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "-o" && i != args.Length-1)
+                {
+                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1])) && File.Exists(Path.GetFileName(args[i + 1])))
+                        buff.PathRead = args[i + 1];
+                }
+                if (args[i] == "-s" && i != args.Length - 1)
+                {
+                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1]))) 
+                        buff.PathSave = args[i + 1];
+                }
+            }
+            if (buff.PathRead != null)
+            {
+                if(buff.PathSave == null)
+                    buff.PathSave = Path.GetDirectoryName(buff.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buff.PathRead) + ".obj";
+                ICommand command = new Commands.Open();
+                command.callBack();
+                command = new Commands.MeshGenerate();
+                command.callBack();
+                command = new Commands.Save();
+                command.callBack();
+            }
+            Environment.Exit(0);
+        }
+    }
+}
+/*string path = Directory.GetCurrentDirectory();
             path = System.IO.Path.Combine(path, "ObjExample2.obj");
             AbstractMesh mesh1 = new RegMesh2D(2, 0);
             AbstractMesh mesh2 = new RegMesh2D(3, 0);
@@ -77,9 +106,4 @@ namespace GMESH_Generator
 
             IContour k = new Geometry.Contour.Contour(curvs);
             IWriter test = new GMESHFileStream.OBJFile.OBJCreator();
-            test.write(path, mesharray);
-    
-    
-        }
-    }
-}
+            test.write(path, mesharray, null);*/
