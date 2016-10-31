@@ -56,6 +56,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,7 +89,7 @@
             this.contourToolStripMenuItem1,
             this.meshToolStripMenuItem1});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // contourToolStripMenuItem1
@@ -109,29 +110,30 @@
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.contourToolStripMenuItem,
-            this.meshToolStripMenuItem});
+            this.meshToolStripMenuItem,
+            this.infoToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // contourToolStripMenuItem
             // 
             this.contourToolStripMenuItem.Name = "contourToolStripMenuItem";
-            this.contourToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.contourToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.contourToolStripMenuItem.Text = "Contour";
             this.contourToolStripMenuItem.Click += new System.EventHandler(this.contourToolStripMenuItem_Click);
             // 
             // meshToolStripMenuItem
             // 
             this.meshToolStripMenuItem.Name = "meshToolStripMenuItem";
-            this.meshToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.meshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.meshToolStripMenuItem.Text = "Mesh";
             this.meshToolStripMenuItem.Click += new System.EventHandler(this.meshToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // pentagonOptionsToolStripMenuItem
@@ -296,6 +298,12 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +358,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
     }
 }
 
