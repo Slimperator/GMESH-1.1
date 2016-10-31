@@ -13,7 +13,18 @@ namespace Geometry.Curve
         private double paramBegin, paramEnd, max, min;
         private IPoint[] CutPoints;
         private double Lenght;
- 
+        private double[] CutParams;
+        public double[] cutParams
+        {
+            get
+            {
+                return this.CutParams;
+            }
+            set
+            {
+                this.CutParams = value;
+            }
+        }
         public SubCurve(ICurve mainCurve, double paramTBegin, double paramTEnd)
         {
             this.mainCurve = mainCurve;
@@ -22,22 +33,41 @@ namespace Geometry.Curve
             begin = this.mainCurve.getPoint(paramBegin);
             end = this.mainCurve.getPoint(paramEnd);
             this.Lenght = mainCurve.lenght;
-            if (paramBegin > paramEnd) 
+            Initialize();
+        }
+        public SubCurve(ICurve mainCurve, IPoint Begin, IPoint End)
+        {
+            this.mainCurve = mainCurve;
+            this.paramBegin = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(Begin)];
+            this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(End)];
+            begin = Begin;
+            end = End;
+            this.Lenght = mainCurve.lenght;
+            Initialize();
+        }
+        private void Initialize()
+        {
+            if (paramBegin > paramEnd)
             {
-                max = paramBegin; 
+                max = paramBegin;
                 min = paramEnd;
             }
-            if (paramBegin < paramEnd) 
-            { 
-                max = paramEnd; 
+            if (paramBegin < paramEnd)
+            {
+                max = paramEnd;
                 min = paramBegin;
             }
             List<IPoint> ps = new List<IPoint>();                   //формируем массив точек-разделителей на основе исходной кривой
-            for (int i = 0; i < mainCurve.cutPoints.Length; i++)
+            List<double> pt = new List<double>();
+            for (int i = 0; i < mainCurve.cutPoints.Length; i++)           //Индуский цикл. Поправить ко второму релизу
             {
                 if (Tools.getParam(mainCurve, i * Lenght) >= min && Tools.getParam(mainCurve, i * Lenght) <= max)
+                {
+                    pt.Add(Tools.getParam(mainCurve, i * Lenght));
                     ps.Add(mainCurve.cutPoints[i]);
+                }
             }
+            CutParams = pt.ToArray();
             CutPoints = ps.ToArray();
         }
         public IPoint getPoint(double t)
