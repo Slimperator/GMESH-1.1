@@ -18,7 +18,7 @@ namespace Decompose.Pentagon
         public IContour[] decompose(IContour contour)
         {
             points = new List<IPoint>();
-            //for (int i = 0; i < contour.getSize(); i++) { contour[i].accept(this); }
+            for (int i = 0; i < contour.getSize(); i++) { points.Add(contour[i].cutPoints[0]); }
 
             List<IContour> contours = new List<IContour>();
             double bestGrade = -1;
@@ -27,22 +27,32 @@ namespace Decompose.Pentagon
             {
                 // Декомпозиция
                 // Треугольник
-                contours.Add(new Contour(new ICurve[] {contour[0], contour[1], new Line(points[2], points[0])}));
-
+                ICurve c = new Line(points[2], points[0]);
+                Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart,c);
+                contours.Add(new Contour(new ICurve[] {contour[0], contour[1], c}));
+                ICurve b = new Line(points[0], points[2]);
+                Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, b);
                 // Четырёхугольник
-                contours.Add(new Contour(new ICurve[] {contour[2], contour[3], contour[4], new Line(points[0], points[2])}));
+                contours.Add(new Contour(new ICurve[] {contour[2], contour[3], contour[4], b}));
 
                 // считаем качество
                 // Треугольник
                 double contourGrade = 0;
                 //TODO: создать конкретные классы для IMeshGenerator
-                IMeshGenerator generator = new Generator.Generator(); // = new TriaMeshGen(10, 10);
-                AbstractMesh mesh = generator.generate(contours[0]);
+                IDecompose tria = new Triangle.TriangleDecompose(); // = new TriaMeshGen(10, 10);
+                IMeshGenerator gen = new Generator.Generator();
+                IContour[] conts = tria.decompose(contours[0]);
+                List<AbstractMesh> meshs = new List<AbstractMesh>();
+                for (int z=0;z<conts.Length;z++)
+                {
+                    meshs.Add(gen.generate(conts[z]));
+                }
+                
 
 
                 //TODO: сделать класс ArithmMeanGrade пабликом???
-
-                contourGrade += new ArithmMeanGrade().calculate(mesh);
+                for (int z = 0; z < meshs.Count; z++)
+                    contourGrade += new ArithmMeanGrade().calculate(meshs[z]);
 
                 //List<RegMesh2D> meshs = generator.generate(contours[0]);
                 //foreach (RegMesh2D j in meshs)
@@ -52,12 +62,11 @@ namespace Decompose.Pentagon
 
                 //TODO: создать конкретные классы для IMeshGenerator????
 
-                generator = new Generator.Generator(); // = new QuadCleverMeshGen(10, 10);
-                mesh = generator.generate(contours[1]);
+                meshs.Add(gen.generate(contours[1]));
 
                 //TODO: сделать класс ArithmMeanGrade пабликом???
 
-                contourGrade += new ArithmMeanGrade().calculate(mesh);
+                contourGrade += new ArithmMeanGrade().calculate(meshs[3]);
                 contourGrade = contourGrade/4.0;
 
                 if (contourGrade > bestGrade)
@@ -81,9 +90,12 @@ namespace Decompose.Pentagon
             }
             contours.Clear();
 
-            contours.Add(new Contour(new ICurve[] {contour[0], contour[1], new Line(points[2], points[0])}));
-
-            contours.Add(new Contour(new ICurve[] {contour[2], contour[3], contour[4], new Line(points[0], points[2])}));
+            ICurve c1 = new Line(points[2], points[0]);
+            Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, c1);
+            contours.Add(new Contour(new ICurve[] { contour[0], contour[1], c1 }));
+            ICurve b1 = new Line(points[0], points[2]);
+            Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, b1);
+            contours.Add(new Contour(new ICurve[] { contour[2], contour[3], contour[4], b1 }));
 
             return contours.ToArray();
         }
