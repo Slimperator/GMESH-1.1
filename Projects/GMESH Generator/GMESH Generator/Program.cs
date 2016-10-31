@@ -34,6 +34,7 @@ namespace GMESH_Generator
                     buff.PathSave = Path.GetDirectoryName(buff.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buff.PathRead) + ".obj";
                 ICommand command = new Commands.Open();
                 command.callBack();
+                buff.Contour[0].lenghtOfPart = 0.2;
                 command = new Commands.MeshGenerate();
                 command.callBack();
                 command = new Commands.Save();
