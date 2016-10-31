@@ -20,11 +20,11 @@ namespace Generator
             ICurve morphCurve;
             for (int i = 0; i < minRows; i++)           //для всех строк
             {
-                A = contour[3].cutPoints[minRows - i];            //Находим точки на боковых линиях, для их морфирования
+                A = contour[3].cutPoints[minRows - i - 1];            //Находим точки на боковых линиях, для их морфирования
                 B = contour[1].cutPoints[i];  
                 morphCurve = new Geometry.Curve.Relocate(new Geometry.Curve.Morph(contour[2], contour[0], i / minRows), A, B); //находим морфированную кривую.
-                Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart,morphCurve);
-                for (int j = 0; j < minColumns; j++)      //для всех ячеек в строке
+                Geometry.Curve.Tools.slittingCurve(minColumns,morphCurve);
+                for (int j = 0; j < morphCurve.cutPoints.Length; j++)      //для всех ячеек в строке
                 {
                     mesh[i, j] = morphCurve.cutPoints[j];
                 }
