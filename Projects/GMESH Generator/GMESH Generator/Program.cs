@@ -28,13 +28,15 @@ namespace GMESH_Generator
                         buff.PathSave = args[i + 1];
                 }
             }
+            //ICurve line = new Geometry.Curve.Line(new Geometry.Point.Point2D(0, 0), new Geometry.Point.Point2D(100, 0));
+            //Geometry.Curve.Tools.slittingCurve((int)10, line);
             if (buff.PathRead != null)
             {
                 if(buff.PathSave == null)
                     buff.PathSave = Path.GetDirectoryName(buff.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buff.PathRead) + ".obj";
                 ICommand command = new Commands.Open();
                 command.callBack();
-                buff.Contour[0].lenghtOfPart = 0.2;
+                buff.Contour[0].lenghtOfPart = 25;               //!!!!!!!!!!!!!!!!!!!!
                 command = new Commands.MeshGenerate();
                 command.callBack();
                 command = new Commands.Save();
