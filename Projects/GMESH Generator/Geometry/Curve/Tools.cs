@@ -7,7 +7,7 @@ namespace Geometry.Curve
 {
     public static class Tools
     {
-        private static double h = 0.001;
+        private static double h = 0.01;
         /// <summary>
         /// Метод вычисления длины кривой
         /// </summary>
@@ -37,13 +37,36 @@ namespace Geometry.Curve
         }
         public static void slittingCurve(double length, ICurve curve)
         {
+            curve.lenght = length;
             List<IPoint> cutPoints = new List<IPoint>();
-            for (; length < Tools.length(curve); length += length)
+            List<double> param = new List<double>();
+            double d = Tools.length(curve);
+            for (double i = 0; i < d; i += length)             //добавить =
             {
-                cutPoints.Add(curve.getPoint(length));
+                param.Add(getParam(curve, i));
+                cutPoints.Add(curve.getPoint(getParam(curve,i)));
             }
             curve.cutPoints = cutPoints.ToArray();
-            curve.lenght = length;
+            curve.cutParams = param.ToArray();
+        }
+        public static void slittingCurve(int points, ICurve curve)
+        {
+            double tOfPart = (double)1 / (points - 1);
+            List<IPoint> cutPoints = new List<IPoint>();
+            List<double> param = new List<double>();
+            double d = Tools.length(curve);
+            for (double i = 0; i <= 1; i += tOfPart)              //добавить =
+            {
+                    param.Add(i);
+                    cutPoints.Add(curve.getPoint(i));
+            }
+            if (cutPoints.Count != points)
+            {
+                param.Add(1);
+                cutPoints.Add(curve.getPoint(1));
+            }
+            curve.cutPoints = cutPoints.ToArray();
+            curve.cutParams = param.ToArray();
         }
         /// <summary>
         /// Метод проверяет две кривые на равенство. В том числе, если кривая перевернута
