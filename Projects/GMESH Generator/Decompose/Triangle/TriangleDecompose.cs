@@ -49,23 +49,25 @@ namespace Decompose.Triangle
             Max = 0;
             IContour[] bestContourCombo = new IContour[3];
 
-            for (int i = 0; i < PointsASide.Length; i++)
+            for (int i = 0; i < PointsASide.Length -1; i++)
             {
-                for (int j = 0; j < PointsBSide.Length; j++)
+                for (int j = 0; j < PointsBSide.Length -1; j++)
                 {
-                    for (int c = 0; c < PointsCSide.Length; c++)
+                    for (int c = 0; c < PointsCSide.Length -1; c++)
                     {
-                        ICurve[] lines = new ICurve[4];
-                        DecomposeTriangle(PointsASide[0], PointsASide[i + 1], PointsCSide[c + 1], PointsCSide[PointsCSide.Length - 1], centre);
-                        decFigures[0] = new Geometry.Contour.Contour(lines);
-                        DecomposeTriangle(PointsBSide[0], PointsBSide[j + 1], PointsASide[i + 1], PointsASide[PointsASide.Length - 1], centre);
-                        decFigures[1] = new Geometry.Contour.Contour(lines);
-                        DecomposeTriangle(PointsCSide[0], PointsCSide[c + 1], PointsBSide[j + 1], PointsBSide[PointsBSide.Length - 1], centre);
-                        decFigures[2] = new Geometry.Contour.Contour(lines);                      
+                        //ICurve[] lines = new ICurve[4];
+                        
+                        decFigures[0] = DecomposeTriangle(contour[0],contour[2],PointsASide[0], PointsASide[i + 1], PointsCSide[c + 1], PointsCSide[PointsCSide.Length - 1], centre);
+                        decFigures[1] = DecomposeTriangle(contour[1],contour[0],PointsBSide[0], PointsBSide[j + 1], PointsASide[i + 1], PointsASide[PointsASide.Length - 1], centre);
+                        decFigures[2] = DecomposeTriangle(contour[2],contour[1],PointsCSide[0], PointsCSide[c + 1], PointsBSide[j + 1], PointsBSide[PointsBSide.Length - 1], centre);
+                        decFigures[0].lenghtOfPart = contour.lenghtOfPart;
+                        decFigures[1].lenghtOfPart = contour.lenghtOfPart;
+                        decFigures[2].lenghtOfPart = contour.lenghtOfPart;
                         double localGrade = 0;
                         for (int f = 0; f < decFigures.Length; f++)
                         {
-                            localGrade += grade.calculate(gen.generate(decFigures[f]));
+                            AbstractMesh mesh = gen.generate(decFigures[f]);
+                            localGrade += grade.calculate(mesh);
                         }
                         if (Max < (localGrade / 3))
                         {
@@ -78,13 +80,15 @@ namespace Decompose.Triangle
             return bestContourCombo;
         }
 
-        private IContour DecomposeTriangle(Geometry.IPoint firstSidePointA, Geometry.IPoint firstSidePointB, Geometry.IPoint secondSidePointA, Geometry.IPoint secondSidePointB, IPoint centre)
+        private IContour DecomposeTriangle(ICurve firstSide, ICurve secondSide, IPoint firstSidePointA, IPoint firstSidePointB, IPoint secondSidePointA, IPoint secondSidePointB, IPoint centre)
         {
             ICurve[] lines = new ICurve[4];
-            lines[0] = new Geometry.Curve.Line(firstSidePointA, firstSidePointB);
+            lines[0] = new Geometry.Curve.SubCurve(firstSide,firstSidePointA, firstSidePointB);
             lines[1] = new Geometry.Curve.Line(firstSidePointB, centre);
+            Geometry.Curve.Tools.slittingCurve(lines[0].lenght, lines[1]);
             lines[2] = new Geometry.Curve.Line(centre, secondSidePointA);
-            lines[3] = new Geometry.Curve.Line(secondSidePointA, secondSidePointB);
+            Geometry.Curve.Tools.slittingCurve(lines[0].lenght, lines[2]);
+            lines[3] = new Geometry.Curve.SubCurve(secondSide,secondSidePointA, secondSidePointB);
 
             return new Geometry.Contour.Contour(lines);
         }
