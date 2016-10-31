@@ -11,6 +11,18 @@ namespace Geometry.Curve
         private ICurve curve;
         private IPoint[] cutPoints;
         private double Lenght;
+        private double[] CutParams;
+        public double[] cutParams
+        {
+            get
+            {
+                return this.CutParams;
+            }
+            set
+            {
+                this.CutParams = value;
+            }
+        }
         public double lenght
         {
             get
