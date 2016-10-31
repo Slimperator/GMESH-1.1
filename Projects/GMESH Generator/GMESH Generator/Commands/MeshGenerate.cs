@@ -31,9 +31,18 @@ namespace GMESH_Generator.Commands
                     storage.Contour = decomposer.decompose(storage.Contour[0]);
                     break;
                 case 5:
-                    decomposeContourLine(storage.Contour[0]);
-                    decomposer = new Decompose.Pentagon.PentagonDecTetraAndTri();
-                    storage.Contour = decomposer.decompose(storage.Contour[0]);
+                    IContour[] cs1, cs2;
+                    decomposeContourLine(storage.Contour[0]);                    //Разбили контур
+                    decomposer = new Decompose.Pentagon.PentagonDecTetraAndTri();    //погрузили в пятиугольный
+                    cs1 = decomposer.decompose(storage.Contour[0]);        //получили контур, где 0 - треугольник, 1 четыреугольник
+                    decomposer = new Decompose.Triangle.TriangleDecompose(); //погружаем треугольник в декомпозитор
+                    cs2 = decomposer.decompose(cs1[0]);
+                    List <IContour>cs = new  List<IContour>();
+                    cs.Add(cs1[1]);
+                    cs.Add(cs2[0]);
+                    cs.Add(cs2[1]);
+                    cs.Add(cs2[2]);
+                    storage.Contour = cs.ToArray();
                     break;
             }
             foreach (IContour x in storage.Contour)       //для всех контуров генерируем сетку
