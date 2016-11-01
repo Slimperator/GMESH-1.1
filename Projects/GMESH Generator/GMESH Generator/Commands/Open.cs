@@ -17,6 +17,7 @@ namespace GMESH_Generator.Commands
 
         public void callBack()
         {
+            Console.WriteLine("Читаем файл...");
             string e = Path.GetExtension(storage.PathRead);
             if (e == ".xml")
             {
@@ -24,6 +25,10 @@ namespace GMESH_Generator.Commands
                 reader.read(storage.PathRead, out contour);
                 Geometry.IContour[] contours = new Geometry.IContour[1] { contour};
                 storage.Contour = contours;
+                if (storage.Contour != null)
+                {
+                    Console.WriteLine("Готово");
+                }
             }
         }
         

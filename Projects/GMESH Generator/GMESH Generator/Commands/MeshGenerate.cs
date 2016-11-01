@@ -26,11 +26,13 @@ namespace GMESH_Generator.Commands
             switch (storage.Contour[0].getSize())                //определяем необходимость декомпозиции контура
             {
                 case 3:
+                    Console.WriteLine("Декомпозируем треугольник...");
                     decomposeContourLine(storage.Contour[0]);
                     decomposer = new Decompose.Triangle.TriangleDecompose();
                     storage.Contour = decomposer.decompose(storage.Contour[0]);
                     break;
                 case 5:
+                    Console.WriteLine("Декомпозируем четырехугольник...");
                     IContour[] cs1, cs2;
                     decomposeContourLine(storage.Contour[0]);                    //Разбили контур
                     decomposer = new Decompose.Pentagon.PentagonDecTetraAndTri();    //погрузили в пятиугольный
@@ -45,6 +47,7 @@ namespace GMESH_Generator.Commands
                     storage.Contour = cs.ToArray();
                     break;
             }
+            Console.WriteLine("Генерируем сетку...");
             foreach (IContour x in storage.Contour)       //для всех контуров генерируем сетку
             {
                 decomposeContourLine(x);
