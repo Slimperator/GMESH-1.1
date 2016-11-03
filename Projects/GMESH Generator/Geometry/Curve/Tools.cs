@@ -84,7 +84,7 @@ namespace Geometry.Curve
                 {
                     straight = false;
                 }
-                if (curve1.cutPoints[i] == curve2.cutPoints[curve2.cutPoints.Length - i])
+                if (curve1.cutPoints[i] != curve2.cutPoints[curve2.cutPoints.Length - 1 - i])
                 {
                     forward = false;
                 }
