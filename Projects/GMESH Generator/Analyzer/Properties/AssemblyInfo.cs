@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Parser")]
+[assembly: AssemblyTitle("Analyzer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("DNA Project")]
-[assembly: AssemblyProduct("Parser")]
-[assembly: AssemblyCopyright("Copyright © DNA Project 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Analyzer")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("174f8c1b-ec3c-4ccc-ab57-cd5b165f68f3")]
+[assembly: Guid("e0a09bca-6f7e-4373-add4-ff7f82dd04f6")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

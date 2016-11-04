@@ -9,10 +9,35 @@ namespace Geometry.Curve
     {
         private IPoint newA, newB;
         private ICurve curve;
-        public IPoint[] cutPoints
+        private IPoint[] cutPoints;
+        private double Lenght;
+        private double[] CutParams;
+        public double[] cutParams
+        {
+            get
+            {
+                return this.CutParams;
+            }
+            set
+            {
+                this.CutParams = value;
+            }
+        }
+        public double lenght
+        {
+            get
+            {
+                return this.Lenght;
+            }
+            set
+            {
+                this.Lenght = value;
+            }
+        }
+        IPoint[] ICurve.cutPoints
         {
             get { return this.cutPoints; }
-            private set;
+            set { this.cutPoints = value; }
         }
         public Relocate(ICurve curve, IPoint newA, IPoint newB)
         {
@@ -28,11 +53,6 @@ namespace Geometry.Curve
             NewPoint.x += (1 - t) * (this.newA.x - A.x) + t * (this.newB.x - B.x);
             NewPoint.y += (1 - t) * (this.newA.y - A.y) + t * (this.newB.y - B.y);
             return NewPoint;
-        }
-
-        public void slittingCurve(double lenght)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -9,15 +9,40 @@ namespace Geometry.Curve
     {
         public IPoint l1 { get; private set; }
         public IPoint l2 { get; private set; }
+        private IPoint[] CutPoints;
+        private double Lenght;
+        private double[] CutParams;
+        public double[] cutParams
+        {
+            get
+            {
+                return this.CutParams;
+            }
+            set
+            {
+                this.CutParams = value;
+            }
+        }
+        public double lenght
+        {
+            get
+            {
+                return this.Lenght;
+            }
+            set
+            {
+                this.Lenght = value;
+            }
+        }
         public IPoint[] cutPoints
         {
             get
             {
-                throw new NotImplementedException();
+                return this.CutPoints;
             }
-            private set
+            set
             {
-                throw new NotImplementedException();
+                this.CutPoints = value;
             }
         }
         public Line(IPoint l1, IPoint l2)
@@ -26,15 +51,9 @@ namespace Geometry.Curve
             this.l2 = l2;
 
         }
-
         public IPoint getPoint(double t)
         {
             return new Point.Point2D((1 - t) * this.l1.x + t * l2.x, (1 - t) * this.l1.y + t * l2.y);
-        }
-
-        public void slittingCurve(double lenght)
-        {
-            throw new NotImplementedException();
         }
     }
 }

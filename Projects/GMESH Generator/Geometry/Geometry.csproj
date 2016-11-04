@@ -41,7 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contour\Contour.cs" />
+    <Compile Include="Curve\Bezier.cs" />
     <Compile Include="Curve\Line.cs" />
+    <Compile Include="Curve\Morph.cs" />
+    <Compile Include="Curve\Relocate.cs" />
+    <Compile Include="Curve\SubCurve.cs" />
+    <Compile Include="Curve\Tools.cs" />
     <Compile Include="Mesh\RegMesh2D.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Point\Point2D.cs" />

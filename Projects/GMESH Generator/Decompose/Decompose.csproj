@@ -41,18 +41,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core.cs" />
+    <Compile Include="Pentagon\PentagonDecTetraAndTri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Triangle\TriangleDecompose.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Analyzer\Analyzer.csproj">
+      <Project>{94B15790-A459-4317-B4F4-75DC5D639FE4}</Project>
+      <Name>Analyzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Generator\Generator.csproj">
+      <Project>{37DD5EE2-A70B-4E1D-BE47-6C7B0BD3F63F}</Project>
+      <Name>Generator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geometry\Geometry.csproj">
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pentagon\" />
-    <Folder Include="Triangle\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

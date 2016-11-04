@@ -13,13 +13,15 @@ namespace Geometry
 
     public interface ICurve
     {
-        IPoint[] cutPoints { get; }
+        IPoint[] cutPoints { get; set; }
+        double[] cutParams { get; set; } //костыль обыкновенный. править во втором релизе
         IPoint getPoint(double t);
-        void slittingCurve(double lenght);
+        double lenght { get; set; } //костыль обыкновенный. для обхода циклической зависимости. править во втором релизе
     }
 
     public interface IContour
     {
+        double lenghtOfPart { get; set; }
         int getSize();
         ICurve this[int i] { get; }
     }
@@ -27,9 +29,9 @@ namespace Geometry
     public abstract class AbstractMesh
     {
         protected IPoint[,] meshPoints;
-        protected int rows;
-        protected int colums;
-        public double sigma { get; set; }
+        public abstract int rows { get; protected set; }
+        public abstract int colums { get; protected set; }
+        public abstract double sigma { get; set; }
         public IPoint this[int i, int j]
         {
             get { return meshPoints[i, j]; }
