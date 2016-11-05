@@ -19,7 +19,7 @@ namespace GMESH_Generator
             {
                 if (args[i] == "-o" && i != args.Length - 1)
                 {
-                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1])) && File.Exists(Path.GetFileName(args[i + 1])))
+                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1])) && File.Exists(args[i + 1]))
                         buff.PathRead = args[i + 1];
                 }
                 if (args[i] == "-s" && i != args.Length - 1)
@@ -45,6 +45,15 @@ namespace GMESH_Generator
             Environment.Exit(0);
 
 
+            //Если хочешь использовать визуализатор
+            //1) Добавь using System.Windows.Forms;
+            //2) расскоменть следующие строки:
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //SimpleMeshTester sim = new SimpleMeshTester();
+            //sim.mesh = buff.Meshs[0];
+            //sim.con = buff.Contour[0];
+            //Application.Run(sim);
 
             /*string path = Directory.GetCurrentDirectory();
             path = System.IO.Path.Combine(path, "ObjExample2.obj");
