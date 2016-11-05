@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d1891118-832b-4dd3-ad33-252b729df1b0" name="klim2@DESKTOP-Q75LUJA 2016-11-05 17:14:15" runUser="DESKTOP-Q75LUJA\klim2" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Локальные" id="97de9f4e-6588-4783-838e-983556bcfdbb">
+    <Description>Это - параметры по умолчанию для локального тестового запуска.</Description>
+    <Deployment enabled="false" runDeploymentRoot="klim2_DESKTOP-Q75LUJA 2016-11-05 17_14_15">
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\GMESHFileStream\bin\Debug\GMESHFileStream.dll" />
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\Generator\bin\Debug\Generator.dll" />
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\Geometry\bin\Debug\Geometry.dll" />
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\GMESH Generator\bin\Debug\GMESH Generator.exe" />
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\Analyzer\bin\Debug\Analyzer.dll" />
+      <DeploymentItem filename="D:\Project\GMESH-1.1\Projects\GMESH Generator\Decompose\bin\Debug\Decompose.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2016-11-05T17:14:15.1106013+03:00" queuing="2016-11-05T17:14:15.8506952+03:00" start="2016-11-05T17:14:15.9017019+03:00" finish="2016-11-05T17:14:16.3957635+03:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestSimpleSquare" storage="d:\project\gmesh-1.1\projects\gmesh generator\testgenerator\bin\debug\testgenerator.dll" id="bd3baba2-63db-bbfc-d35d-20900cd1fdc2">
+      <Execution id="8881c935-9173-4a37-8cff-49d832706a50" />
+      <TestMethod codeBase="D:/Project/GMESH-1.1/Projects/GMESH Generator/TestGenerator/bin/Debug/TestGenerator.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestGenerator.test_simple_square, TestGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestSimpleSquare" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Отсутствующие в списке результаты" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="bd3baba2-63db-bbfc-d35d-20900cd1fdc2" executionId="8881c935-9173-4a37-8cff-49d832706a50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="8881c935-9173-4a37-8cff-49d832706a50" testId="bd3baba2-63db-bbfc-d35d-20900cd1fdc2" testName="TestSimpleSquare" computerName="DESKTOP-Q75LUJA" duration="00:00:00.1060308" startTime="2016-11-05T17:14:15.9212088+03:00" endTime="2016-11-05T17:14:16.3512574+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8881c935-9173-4a37-8cff-49d832706a50">
+      <Output>
+        <ErrorInfo>
+          <Message>Ошибка в Assert.AreEqual. Ожидается: &lt;True&gt;. Фактически: &lt;False&gt;. </Message>
+          <StackTrace>   в TestGenerator.test_simple_square.TestSimpleSquare() в D:\Project\GMESH-1.1\Projects\GMESH Generator\TestGenerator\test simple square.cs:строка 88
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>
