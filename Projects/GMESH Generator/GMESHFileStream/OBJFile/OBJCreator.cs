@@ -37,17 +37,17 @@ namespace GMESHFileStream.OBJFile
                     {
 
 
-                        if ((k % mesh[0].colums) == 0)
+                        if ((k % mesh[0].rows) == 0)
                         {
                             sw.Write("l");
                             sw.Write(" ");
                             sw.Write(Convert.ToString(k));
                             sw.Write(" ");
-                            sw.Write(Convert.ToString(k + mesh[0].colums));
+                            sw.Write(Convert.ToString(k + mesh[0].rows));
                             sw.WriteLine();
                         }
 
-                        if (k > mesh[0].rows * mesh[0].colums - mesh[0].colums)
+                        if (k > mesh[0].rows * mesh[0].colums - mesh[0].rows)
                         {
                             sw.Write("l");
                             sw.Write(" ");
@@ -57,7 +57,7 @@ namespace GMESHFileStream.OBJFile
                             sw.WriteLine();
                         }
 
-                        if ((k < mesh[0].rows * mesh[0].colums - mesh[0].colums) && ((k % mesh[0].colums) != 0))
+                        if ((k < mesh[0].rows * mesh[0].colums - mesh[0].rows) && ((k % mesh[0].rows) != 0))
                         {
                             sw.Write("l");
                             sw.Write(" ");
@@ -70,7 +70,7 @@ namespace GMESHFileStream.OBJFile
                             sw.Write(" ");
                             sw.Write(Convert.ToString(k));
                             sw.Write(" ");
-                            sw.Write(Convert.ToString(k + mesh[0].colums));
+                            sw.Write(Convert.ToString(k + mesh[0].rows));
                             sw.WriteLine();
                         }
 
