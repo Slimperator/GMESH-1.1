@@ -12,7 +12,7 @@ namespace GMESH_Generator
 {
     public partial class TestVisualizerForInternalMeshForm : Form
     {
-        public AbstractMesh mesh;
+        public AbstractMesh[] meshs;
         public IContour con;
         public TestVisualizerForInternalMeshForm()
         {
@@ -22,16 +22,19 @@ namespace GMESH_Generator
         private void TestVisualizerForInternalMeshForm_Paint(object sender, PaintEventArgs e)
         {
             //тут рисуем сетку
-            for (int i = 0; i < mesh.rows; i++)
+            foreach (AbstractMesh mesh in meshs)
             {
-                for (int j = 0; j < mesh.colums; j++)
+                for (int i = 0; i < mesh.rows; i++)
                 {
-                    float f = Convert.ToSingle(mesh[i, j].x);
-                    float g = Convert.ToSingle(mesh[i, j].y);
-                    e.Graphics.FillEllipse(Brushes.Red, f, g, 10, 10);
+                    for (int j = 0; j < mesh.colums; j++)
+                    {
+                        float f = Convert.ToSingle(mesh[i, j].x);
+                        float g = Convert.ToSingle(mesh[i, j].y);
+                        e.Graphics.FillEllipse(Brushes.Red, f, g, 10, 10);
+                    }
                 }
             }
-            //тут контур по факту
+            /*//тут контур по факту
             e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(con[0].cutPoints[0].x), Convert.ToSingle(con[0].cutPoints[0].y), Convert.ToSingle(con[0].cutPoints[con[0].cutPoints.Length - 1].x), Convert.ToSingle(con[0].cutPoints[con[0].cutPoints.Length - 1].y));
             e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(con[1].cutPoints[0].x), Convert.ToSingle(con[1].cutPoints[0].y), Convert.ToSingle(con[1].cutPoints[con[1].cutPoints.Length - 1].x), Convert.ToSingle(con[1].cutPoints[con[1].cutPoints.Length - 1].y));
             e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(con[2].cutPoints[0].x), Convert.ToSingle(con[2].cutPoints[0].y), Convert.ToSingle(con[2].cutPoints[con[2].cutPoints.Length - 1].x), Convert.ToSingle(con[2].cutPoints[con[2].cutPoints.Length - 1].y));
@@ -52,7 +55,7 @@ namespace GMESH_Generator
                     float g = Convert.ToSingle(con[i].cutPoints[j].y);
                     e.Graphics.FillEllipse(b[i], f, g, 5, 5);
                 }
-            }
+            }*/
         }
     }
 }
