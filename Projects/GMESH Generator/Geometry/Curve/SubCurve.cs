@@ -38,8 +38,8 @@ namespace Geometry.Curve
         public SubCurve(ICurve mainCurve, IPoint Begin, IPoint End)
         {
             this.mainCurve = mainCurve;
-            this.paramBegin = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(Begin)];
-            this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(End)];
+            this.paramBegin = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == Begin.x && x.y == Begin.y)];
+            this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == End.x && x.y == End.y)];
             begin = Begin;
             end = End;
             this.Lenght = mainCurve.lenght;
