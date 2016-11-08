@@ -29,26 +29,19 @@ namespace GMESH_Generator
                         buff.PathSave = args[i + 1];
                 }
             }
-            //ICurve line = new Geometry.Curve.Line(new Geometry.Point.Point2D(0, 0), new Geometry.Point.Point2D(100, 0));
-            //Geometry.Curve.Tools.slittingCurve((int)10, line);
+            
             if (buff.PathRead != null)
             {
                 if (buff.PathSave == null)
                     buff.PathSave = Path.GetDirectoryName(buff.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buff.PathRead) + ".obj";
                 ICommand command = new Commands.Open();
                 command.callBack();
-                buff.Contour[0].lenghtOfPart = 25;               //!!!!!!!!!!!!!!!!!!!!
+                buff.Contour[0].lenghtOfPart = 20;               //!!!!!!!!!!!!!!!!!!!!
                 command = new Commands.MeshGenerate();
                 command.callBack();
                 command = new Commands.Save();
                 command.callBack();
             }
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            TestVisualizerForInternalMeshForm sim = new TestVisualizerForInternalMeshForm();
-            sim.meshs = buff.Meshs;
-            sim.con = buff.Contour[0];
-            Application.Run(sim);
             Environment.Exit(0);
 
 
@@ -57,9 +50,9 @@ namespace GMESH_Generator
             //2) расскоменть следующие строки:
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            //SimpleMeshTester sim = new SimpleMeshTester();
-            //sim.mesh = buff.Meshs[0];
-            //sim.con = buff.Contour[0];
+            //TestVisualizerForInternalMeshForm sim = new TestVisualizerForInternalMeshForm();
+            //sim.meshs = buff.Meshs;
+            //sim.cons = buff.Contour;
             //Application.Run(sim);
 
             /*string path = Directory.GetCurrentDirectory();
@@ -173,6 +166,28 @@ namespace GMESH_Generator
             IWriter test = new GMESHFileStream.OBJFile.OBJCreator();
             test.write(path, mesharray, null);
             */
+            /*//тестовое дерьмо для отрезков
+            IPoint x1 = new Geometry.Point.Point2D(0, 0);
+            IPoint x2 = new Geometry.Point.Point2D(100, 0);
+            IPoint x3 = new Geometry.Point.Point2D(100, 100);
+            IPoint x4 = new Geometry.Point.Point2D(0, 100);
+            IPoint C = new Geometry.Point.Point2D(50, 50);
+
+            ICurve curve = new Geometry.Curve.Line(x1, x2);
+            ICurve curve1 = new Geometry.Curve.Line(x2, x3);
+            ICurve curve2 = new Geometry.Curve.Line(x3, x4);
+            ICurve curve3 = new Geometry.Curve.Line(x4, x1);
+            Geometry.Curve.Tools.slittingCurve(10.0, curve);
+            Geometry.Curve.Tools.slittingCurve(10.0, curve3);
+            ICurve Scurve = new Geometry.Curve.SubCurve(curve, curve.cutPoints[0], curve.cutPoints[4]);
+            ICurve Scurve1 = new Geometry.Curve.SubCurve(curve3, curve3.cutPoints[5], curve3.cutPoints[curve3.cutPoints.Length-1]);
+
+            ICurve[] curvs = new ICurve[4] { Scurve, new Geometry.Curve.Line(curve.cutPoints[4], C), new Geometry.Curve.Line(C, curve3.cutPoints[5]), Scurve1 };
+
+            IContour k = new Geometry.Contour.Contour(curvs);
+            buff.Contour = new IContour[1] { k };*/
+            //ICurve line = new Geometry.Curve.Line(new Geometry.Point.Point2D(0, 0), new Geometry.Point.Point2D(100, 0));
+            //Geometry.Curve.Tools.slittingCurve((int)10, line);
         }
     }
 }
