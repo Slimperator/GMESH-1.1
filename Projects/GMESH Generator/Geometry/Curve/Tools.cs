@@ -40,14 +40,15 @@ namespace Geometry.Curve
             curve.lenght = length;
             List<IPoint> cutPoints = new List<IPoint>();
             List<double> param = new List<double>();
-            double d = Tools.length(curve);
+            double d = Math.Round(Tools.length(curve), 4);
             double i = 0.0;
             for (; i <= d; i += length)             //добавить =
             {
                 param.Add(getParam(curve, i));
                 cutPoints.Add(curve.getPoint(getParam(curve, i)));
             }
-            if (d - i == 0)                                 //если остатка у линии нет, то возвращаем найденные точки    
+            i -= length;
+            if ((d - i) < 0.001)                                 //если остатка у линии нет, то возвращаем найденные точки    
             {
                 curve.cutPoints = cutPoints.ToArray();
                 curve.cutParams = param.ToArray();
