@@ -59,14 +59,16 @@ namespace Geometry.Curve
             }
             List<IPoint> ps = new List<IPoint>();                   //формируем массив точек-разделителей на основе исходной кривой
             List<double> pt = new List<double>();
-            for (int i = 0; i < mainCurve.cutPoints.Length; i++)           //Индуский цикл. Поправить ко второму релизу
+
+            for (int i = 0; i < mainCurve.cutParams.Length; i++)
             {
-                if (Tools.getParam(mainCurve, i * Lenght) >= min && Tools.getParam(mainCurve, i * Lenght) <= max)
+                if (mainCurve.cutParams[i] >= min && mainCurve.cutParams[i] <= max)
                 {
-                    pt.Add(Tools.getParam(mainCurve, i * Lenght));
+                    pt.Add(mainCurve.cutParams[i]);
                     ps.Add(mainCurve.cutPoints[i]);
                 }
             }
+                
             CutParams = pt.ToArray();
             CutPoints = ps.ToArray();
         }
