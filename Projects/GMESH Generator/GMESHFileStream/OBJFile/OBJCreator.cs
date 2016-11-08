@@ -78,9 +78,7 @@ namespace GMESHFileStream.OBJFile
                                     sw.Write(" ");
                                     sw.Write("0");
                                     sw.WriteLine();
-                                    sw.WriteLine();
-                                    sw.WriteLine();
-                                    sw.WriteLine();
+                            
                                 }
                             continue;
                         }
@@ -109,7 +107,7 @@ namespace GMESHFileStream.OBJFile
                             exstra_lines_count[c] = mesh[numbers_in_real[c]].colums;
                             i_i = 1;
                             j_j = 0;
-                            int count = 0;
+                         
                             for (int i = i_i; i < mesh[numbers_in_real[c]].rows; i++)//колличесво строк в матрице
                                 for (int j = j_j; j < mesh[numbers_in_real[c]].colums; j++)//колличество столбцов в матрице
                                 {
@@ -122,9 +120,9 @@ namespace GMESHFileStream.OBJFile
                                     sw.Write(" ");
                                     sw.Write("0");
                                     sw.WriteLine();
-                                    count++;
+                                   
                                 }
-                            sw.Write(Convert.ToString(count));
+                          
                         }
 
                         if ((i_control_bool[c] == false) && (i_control[c] != 1))//столбец 3
