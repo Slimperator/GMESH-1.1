@@ -52,8 +52,8 @@ namespace GMESHFileStream.OBJFile
                     if (flagEqualsCurve)
                         break;
                 }
-            if (!File.Exists(filename))
-            {
+            if (File.Exists(filename))       //костыль, чтобы всегда создавался новый файл
+                File.Delete(filename);
                 // Create a file to write to.
                 using (StreamWriter sw = File.CreateText(filename))
                 {
@@ -248,7 +248,7 @@ namespace GMESHFileStream.OBJFile
                         k_repeat = k_k + 1;
                     }
                 }
-            }
+            
 
             return 0;
         }
