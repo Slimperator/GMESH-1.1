@@ -21,20 +21,22 @@ namespace Decompose.Pentagon
             for (int i = 0; i < contour.getSize(); i++) { points.Add(contour[i].cutPoints[0]); }
 
             List<IContour> contours = new List<IContour>();
-            double bestGrade = -1;
-            int bestIndex = 0;
+            double bestGrade = -1;//наилучшая оценка (для сравнения)
+            int bestIndex = 0;//индекс "наилучшей комбинации"
+            // у нас возможны 5 вариантов разбиения контура на 3-к и 4-к
+            //в цикле перебираем все, и ищем разбиение с наивысшим показателем оценки качества
             for (int i = 0; i < 5; i++)
             {
-                // Декомпозиция
+                // Декомпозиция (разбиваем)
                 // Треугольник
-                ICurve c = new Line(points[2], points[0]);
+                ICurve c = new Line(points[2], points[0]); 
                 Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart,c);
                 contours.Add(new Contour(new ICurve[] {contour[0], contour[1], c}));
-                ICurve b = new Line(points[0], points[2]);
-                Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, b);
+                ICurve b = new ReverseCurve(c);
                 // Четырёхугольник
                 contours.Add(new Contour(new ICurve[] {contour[2], contour[3], contour[4], b}));
-
+                contours[0].lenghtOfPart = contour.lenghtOfPart;
+                contours[1].lenghtOfPart = contour.lenghtOfPart;
                 // считаем качество
                 // Треугольник
                 double contourGrade = 0;
@@ -93,9 +95,10 @@ namespace Decompose.Pentagon
             ICurve c1 = new Line(points[2], points[0]);
             Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, c1);
             contours.Add(new Contour(new ICurve[] { contour[0], contour[1], c1 }));
-            ICurve b1 = new Line(points[0], points[2]);
-            Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, b1);
+            ICurve b1 = new ReverseCurve(c1);
             contours.Add(new Contour(new ICurve[] { contour[2], contour[3], contour[4], b1 }));
+            contours[0].lenghtOfPart = contour.lenghtOfPart;
+            contours[1].lenghtOfPart = contour.lenghtOfPart;
 
             return contours.ToArray();
         }

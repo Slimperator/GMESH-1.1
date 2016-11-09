@@ -38,8 +38,8 @@ namespace Geometry.Curve
         public SubCurve(ICurve mainCurve, IPoint Begin, IPoint End)
         {
             this.mainCurve = mainCurve;
-            this.paramBegin = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(Begin)];
-            this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().IndexOf(End)];
+            this.paramBegin = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == Begin.x && x.y == Begin.y)];
+            this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == End.x && x.y == End.y)];
             begin = Begin;
             end = End;
             this.Lenght = mainCurve.lenght;
@@ -59,14 +59,16 @@ namespace Geometry.Curve
             }
             List<IPoint> ps = new List<IPoint>();                   //формируем массив точек-разделителей на основе исходной кривой
             List<double> pt = new List<double>();
-            for (int i = 0; i < mainCurve.cutPoints.Length; i++)           //Индуский цикл. Поправить ко второму релизу
+
+            for (int i = 0; i < mainCurve.cutParams.Length; i++)
             {
-                if (Tools.getParam(mainCurve, i * Lenght) >= min && Tools.getParam(mainCurve, i * Lenght) <= max)
+                if (mainCurve.cutParams[i] >= min && mainCurve.cutParams[i] <= max)
                 {
-                    pt.Add(Tools.getParam(mainCurve, i * Lenght));
+                    pt.Add(mainCurve.cutParams[i]);
                     ps.Add(mainCurve.cutPoints[i]);
                 }
             }
+                
             CutParams = pt.ToArray();
             CutPoints = ps.ToArray();
         }
