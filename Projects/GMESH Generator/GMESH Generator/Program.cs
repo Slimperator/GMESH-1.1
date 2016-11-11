@@ -7,6 +7,7 @@ using GMESHFileStream;
 using Decompose;
 using Generator;
 using System.IO;
+using System.Windows.Forms;
 
 namespace GMESH_Generator
 {
@@ -42,6 +43,12 @@ namespace GMESH_Generator
                 command = new Commands.Save();
                 command.callBack();
             }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            TestVisualizerForInternalMeshForm sim = new TestVisualizerForInternalMeshForm();
+            sim.meshs = buff.Meshs;
+            sim.con = buff.Contour[0];
+            Application.Run(sim);
             Environment.Exit(0);
 
 
