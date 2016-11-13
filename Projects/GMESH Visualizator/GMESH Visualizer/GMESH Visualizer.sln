@@ -3,16 +3,48 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMESH Visualizer", "GMESH Visualizer\GMESH Visualizer.csproj", "{407ACA1C-EFE7-4D02-B5B8-373F2705C456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVisualizer", "TestVisualizer\TestVisualizer.csproj", "{CC3582D5-05A3-492D-9D6C-48DC253CAE04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5AF15F1-ECFC-429D-B828-883C2134F4E5}"
+	ProjectSection(SolutionItems) = preProject
+		GMESH Visualizer.vsmdi = GMESH Visualizer.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GMESH Visualizer.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Debug|x86.ActiveCfg = Debug|x86
 		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Debug|x86.Build.0 = Debug|x86
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Release|Any CPU.ActiveCfg = Release|x86
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Release|Mixed Platforms.Build.0 = Release|x86
 		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Release|x86.ActiveCfg = Release|x86
 		{407ACA1C-EFE7-4D02-B5B8-373F2705C456}.Release|x86.Build.0 = Release|x86
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CC3582D5-05A3-492D-9D6C-48DC253CAE04}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
