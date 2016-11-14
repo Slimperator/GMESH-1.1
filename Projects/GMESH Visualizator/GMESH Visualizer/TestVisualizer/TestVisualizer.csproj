@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{805BE5BD-3409-4F17-BEC5-FA061FF97F6B}</ProjectGuid>
+    <ProjectGuid>{CC3582D5-05A3-492D-9D6C-48DC253CAE04}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestGenerator</RootNamespace>
-    <AssemblyName>TestGenerator</AssemblyName>
+    <RootNamespace>TestVisualizer</RootNamespace>
+    <AssemblyName>TestVisualizer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -33,16 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -50,41 +45,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KillGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="test simple square.cs" />
-    <Compile Include="TestSaveofFile.cs" />
-    <Compile Include="TestWayofFile.cs" />
-    <Compile Include="TriangleDecomposeTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Analyzer\Analyzer.csproj">
-      <Project>{94B15790-A459-4317-B4F4-75DC5D639FE4}</Project>
-      <Name>Analyzer</Name>
+    <ProjectReference Include="..\GMESH Visualizer\GMESH Visualizer.csproj">
+      <Project>{407ACA1C-EFE7-4D02-B5B8-373F2705C456}</Project>
+      <Name>GMESH Visualizer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Decompose\Decompose.csproj">
-      <Project>{C53245C7-7C8B-4726-8D93-C88C90233C6F}</Project>
-      <Name>Decompose</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Generator\Generator.csproj">
-      <Project>{37DD5EE2-A70B-4E1D-BE47-6C7B0BD3F63F}</Project>
-      <Name>Generator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Geometry\Geometry.csproj">
-      <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
-      <Name>Geometry</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GMESH Generator\GMESH Generator.csproj">
-      <Project>{3150C600-BE13-4762-BA88-8008AECC2269}</Project>
-      <Name>GMESH Generator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GMESHFileStream\GMESHFileStream.csproj">
-      <Project>{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}</Project>
-      <Name>GMESHFileStream</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Shadow Include="Test References\Decompose.accessor" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

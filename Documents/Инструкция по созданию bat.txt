@@ -1,0 +1,6 @@
+1. Начинаем с команды Start
+2.Далее вводим название ""
+3.Далее прописываем путь до процесса ("D:\Project\GMESH-1.1\Projects\GMESH Generator\GMESH Generator\bin\Debug\GMESH Generator.exe")
+4.Указываем параметры для cmd в -o -s
+Пример (-o "C:\Users\klim2\Desktop\newtest\4.xml" -s "C:\Users\klim2\Desktop\TestResults\5674.obj")
+5. По желанию указываем параметры для cmd(pause, exit или другие параметры)
