@@ -13,7 +13,7 @@ namespace GMESH_Generator
     public partial class TestVisualizerForInternalMeshForm : Form
     {
         public AbstractMesh[] meshs;
-        public IContour con;
+        public IContour[] cons;
         public TestVisualizerForInternalMeshForm()
         {
             InitializeComponent();
@@ -43,9 +43,10 @@ namespace GMESH_Generator
             e.Graphics.DrawLine(Pens.Blue, 170, 64, 465, 65);
             e.Graphics.DrawLine(Pens.Blue, 465, 65, 464, 238);
             e.Graphics.DrawLine(Pens.Blue, 464, 238, 169, 237);
-            e.Graphics.DrawLine(Pens.Blue, 169, 237, 170, 64);
+            e.Graphics.DrawLine(Pens.Blue, 169, 237, 170, 64);*/
             //тут рисуем точки cutPoints. Для каждой кривой раскрашиваем своим цветом
             Brush[] b = new Brush[4] { Brushes.Brown, Brushes.Green, Brushes.DarkGoldenrod, Brushes.ForestGreen };
+            foreach(IContour con in cons)
             for (int i = 0; i < 4; i++)
             {
                 
@@ -55,7 +56,7 @@ namespace GMESH_Generator
                     float g = Convert.ToSingle(con[i].cutPoints[j].y);
                     e.Graphics.FillEllipse(b[i], f, g, 5, 5);
                 }
-            }*/
+            }
         }
     }
 }
