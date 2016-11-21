@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Analyzer">
+      <HintPath>..\..\..\GMESH Generator\Analyzer\bin\Debug\Analyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="Geometry">
+      <HintPath>..\..\..\GMESH Generator\Geometry\bin\Debug\Geometry.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
