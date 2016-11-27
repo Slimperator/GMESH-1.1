@@ -19,7 +19,7 @@ namespace GMESH_Generator.Commands
             if (storage.Meshs == null || storage.PathSave == null)   //проверяем, есть ли что сохранять, и есть ли куда сохранять
                 return;
             Console.WriteLine("Пишем сетку...");
-            writer.write(storage.PathSave,storage.Meshs, storage.Contour);             //сохраняем
+            writer.write(storage.PathSave,storage.Meshs);             //сохраняем
         }
     }
 }
