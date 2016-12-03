@@ -8,7 +8,8 @@ namespace Geometry
     public interface IPoint
     {
         double x { get; set; }
-        double y { get; set; }    
+        double y { get; set; }
+        int rate { get; set; }
     }
 
     public interface ICurve
