@@ -14,6 +14,7 @@ namespace Geometry.Curve
         private IPoint[] CutPoints;
         private double Lenght;
         private double[] CutParams;
+        private int countPointsParentCurve;
         public double[] cutParams
         {
             get
@@ -74,6 +75,8 @@ namespace Geometry.Curve
         }
         public IPoint getPoint(double t)
         {
+            if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
+                Initialize();
             return this.mainCurve.getPoint(t * (max - min) + min);
         }
 
@@ -81,6 +84,8 @@ namespace Geometry.Curve
         {
             get
             {
+                if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
+                    Initialize();
                 return this.CutPoints;
             }
             set
@@ -98,6 +103,19 @@ namespace Geometry.Curve
 	        { 
 		        throw new NotImplementedException(); 
 	        }
+        }
+        //Функция проверяет, не изменился ли кривая-родитель. Если кривая родитель изменилась, тогда возвращает true
+        private bool notifyParent()
+        {
+            bool changeFlag = false;
+            if (mainCurve.cutPoints.Length != countPointsParentCurve)
+                return true;
+            foreach (IPoint p in this.CutPoints)
+            {
+                if (Array.IndexOf(mainCurve.cutPoints,p) == -1)
+                    changeFlag = true;
+            }
+            return changeFlag;
         }
     }
 }
