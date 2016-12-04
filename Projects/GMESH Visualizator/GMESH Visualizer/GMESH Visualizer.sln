@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parcer", "Parcer\Parcer.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "Analyzer\Analyzer.csproj", "{E24E5EDB-7E57-42F5-851C-A161986E3CFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{C6DEAC97-B708-4C50-B342-710DCA738A51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "..\..\GMESH Generator\Geometry\Geometry.csproj", "{C6DEAC97-B708-4C50-B342-710DCA738A51}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

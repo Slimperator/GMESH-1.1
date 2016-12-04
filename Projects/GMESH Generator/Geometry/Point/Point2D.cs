@@ -9,6 +9,8 @@ namespace Geometry.Point
     {
         private double x;
         private double y;
+        private int rate;
+
         public Point2D(double x, double y)
         {
             this.x = x;
@@ -36,6 +38,17 @@ namespace Geometry.Point
             set
             {
                 this.y = value;
+            }
+        }
+        int IPoint.rate
+        {
+            get
+            {
+                return rate;
+            }
+            set
+            {
+                this.rate = value;
             }
         }
     }
