@@ -43,11 +43,12 @@ namespace Parcer
 
 
                 }
-                var arr = forPows.GroupBy(j =>j).Select(j => j.Count()).ToArray();
-                for (int i = 1; i < listPoint.Count; i++ )
+                forPows.Sort();
+                var arr = forPows.GroupBy(j => j).Select(j => j.Count()).ToArray();
+                for (int i = 1; i < listPoint.Count; i++)
                 {
                     listPoint[i].rate = arr[i];
-            }
+                }
             }
             return listPoint;
         }
