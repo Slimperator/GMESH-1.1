@@ -10,6 +10,7 @@ namespace Geometry.Curve
         private ICurve curve;
         private IPoint[] CutPoints;
         private double[] CutParams;
+        private double Lenght;
 
         public ReverseCurve()
         {
@@ -21,6 +22,7 @@ namespace Geometry.Curve
         public ReverseCurve(ICurve curve)
         {
             this.curve = curve;
+            this.lenght = curve.lenght;
             this.CutPoints = new IPoint[this.curve.cutPoints.Length];
             this.CutParams = new double[this.curve.cutParams.Length];
             for (int i = 0; i < this.curve.cutPoints.Length; i++)
@@ -33,6 +35,10 @@ namespace Geometry.Curve
             }
         }
 
+        public IPoint getPoint(double t)
+        {
+            return this.curve.getPoint(1 - t);
+        }
         public IPoint[] cutPoints
         {
             get
@@ -44,7 +50,6 @@ namespace Geometry.Curve
                 this.CutPoints = value;
             }
         }
-
         public double[] cutParams
         {
             get
@@ -56,21 +61,15 @@ namespace Geometry.Curve
                 this.CutParams = value;
             }
         }
-
-        public IPoint getPoint(double t)
-        {
-            return this.curve.getPoint(1 - t);
-        }
-
         public double lenght
         {
             get
             {
-                return this.curve.lenght;
+                return this.Lenght;
             }
-            set
+            private set
             {
-                this.curve.lenght = value;
+                this.Lenght = value;
             }
         }
     }
