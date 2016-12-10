@@ -4,25 +4,26 @@ using System.Linq;
 using System.Text;
 using Geometry;
 using Geometry.Point;
+using Preprocessing;
 using System.IO;
 
 namespace Parcer
 {
     public class ObjReader
     {
-        public List<IPoint> objReader(string path)
+        public void objReader(string path, out List<IPoint> listPoint, out List<ICurve> listCurve)
         {
-            List<IPoint> listPoint = new List<IPoint>();//сюдабудем писать вершинки
+
+            listPoint = new List<IPoint>();//сюдабудем писать вершинки
+            listCurve = new List<ICurve>();//сюда отрезки
+            List<int> someInts = new List<int>();//индексы точек(от 0)
             StreamReader objReader = new StreamReader(path);
-            string[] objPoints;
-            string[] objLines;
+            string[] objPoints;//для парсинга строки
+            string[] objLines;//для парсинга строки
             int[] objPointsID = new int[3];//значение х у для каждой точки
             List<int> forPows = new List<int>();
-            IPoint tmp = null;
             char delimiter = ' ';
             string line;
-            //String[] substrings = value.Split(delimiter);
-
             while ((line = objReader.ReadLine()) != null)
             {
                 if (line.ToString() != "")
@@ -33,24 +34,21 @@ namespace Parcer
                         listPoint.Add(new Point2D(Convert.ToDouble(objPoints[1]), Convert.ToDouble(objPoints[2])));
 
                     }
-                    // else break;
                     if (line[0].ToString() == "l")
                     {
+                        
                         objLines = line.Split(delimiter);
-                        forPows.Add(Convert.ToInt32(objLines[1]));
-                        forPows.Add(Convert.ToInt32(objLines[2]));
+                        someInts.Add(Convert.ToInt32(objLines[1]) - 1);
+                        someInts.Add(Convert.ToInt32(objLines[2]) - 1);
+                        listCurve.Add(new Geometry.Curve.Line(listPoint[Convert.ToInt32(objLines[1]) - 1], listPoint[Convert.ToInt32(objLines[2])-1]));
                     }
 
 
                 }
-                forPows.Sort();
-                var arr = forPows.GroupBy(j => j).Select(j => j.Count()).ToArray();
-                for (int i = 1; i < listPoint.Count; i++)
-                {
-                    listPoint[i].rate = arr[i];
-                }
+                graph Gr = Preprocessing.graph.construct(someInts.ToArray());
+                Preprocessing.alg.cycles(Gr);
             }
-            return listPoint;
+            
         }
 
     }
