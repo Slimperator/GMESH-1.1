@@ -9,7 +9,6 @@ namespace Geometry
     {
         double x { get; set; }
         double y { get; set; }
-        int rate { get; set; }
     }
 
     public interface ICurve
