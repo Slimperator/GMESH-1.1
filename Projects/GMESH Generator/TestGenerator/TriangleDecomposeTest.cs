@@ -160,9 +160,10 @@ namespace TestGenerator
             }
 
             IContour[] decFigures = new IContour[3];
-            side1.lenght = 3;
-            side2.lenght = 3;
-            side3.lenght = 3;
+            //больше не нужны:
+            //side1.lenght = 3;
+            //side2.lenght = 3;
+            //side3.lenght = 3;
             decFigures[0] = target.DecomposeTriangle(side1, side3, realtriangle[0].cutPoints[0], sidePointsCentres[0], sidePointsCentres[2], realtriangle[2].cutPoints[2], centre);
             decFigures[1] = target.DecomposeTriangle(side2, side1, realtriangle[1].cutPoints[0], sidePointsCentres[1], sidePointsCentres[0], realtriangle[0].cutPoints[2], centre);
             decFigures[2] = target.DecomposeTriangle(side3, side2, realtriangle[2].cutPoints[0], sidePointsCentres[2], sidePointsCentres[1], realtriangle[1].cutPoints[2], centre);
