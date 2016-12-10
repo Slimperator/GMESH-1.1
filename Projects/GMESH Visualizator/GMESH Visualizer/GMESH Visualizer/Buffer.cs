@@ -17,7 +17,7 @@ namespace GMESH_Visualizer
         List<IContour> contour { get; set; }
         graph graph { get; set; }
 
-        static private Buffer()
+        private Buffer()
         { }
         static public Buffer getInstance()
         {
