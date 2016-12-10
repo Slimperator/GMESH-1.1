@@ -33,14 +33,14 @@ namespace Geometry.Curve
         /// <returns>Параметр t</returns>
         public static double getParam(ICurve curve, double length)
         {
-            return length / Tools.length(curve);
+            return length / curve.lenght;
         }
         public static void slittingCurve(double length, ICurve curve)
         {
-            curve.lenght = length;
+            //this.curve.lenght = length;
             List<IPoint> cutPoints = new List<IPoint>();
             List<double> param = new List<double>();
-            double d = Math.Round(Tools.length(curve), 4);
+            double d = curve.lenght;
             double i = 0.0;
             for (; i <= d; i += length)             //добавить =
             {
@@ -63,7 +63,7 @@ namespace Geometry.Curve
             double tOfPart = (double)1 / (points - 1);
             List<IPoint> cutPoints = new List<IPoint>();
             List<double> param = new List<double>();
-            double d = Tools.length(curve);
+            double d = curve.lenght;
             for (double i = 0; i <= 1; i += tOfPart)              //добавить =
             {
                 param.Add(i);
