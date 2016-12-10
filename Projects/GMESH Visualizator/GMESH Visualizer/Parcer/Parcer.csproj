@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="ObjReader.cs" />
+    <Compile Include="Preprocessing\alg.cs" />
+    <Compile Include="Preprocessing\Graph.cs" />
+    <Compile Include="Preprocessing\Queue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

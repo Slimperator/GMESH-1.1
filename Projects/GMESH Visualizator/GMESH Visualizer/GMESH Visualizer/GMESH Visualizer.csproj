@@ -86,6 +86,14 @@
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Errors\Errors.csproj">
+      <Project>{FDC5FC78-DE79-485F-ABC7-D07A6738DCFA}</Project>
+      <Name>Errors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parcer\Parcer.csproj">
+      <Project>{2D889952-1901-41AE-9B75-77E892322C16}</Project>
+      <Name>Parcer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
