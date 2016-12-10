@@ -34,57 +34,12 @@ namespace GMESHFileStream.OBJFile
         }
     }
 
-    class Ppoint : IEquatable<Ppoint>, IComparable<Ppoint>, IPoint
-    {
-        private double x;
-        private double y;
-        public Ppoint(double x, double y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-        public bool Equals(Ppoint other)
-        {
-            return this.x == other.x && this.y == other.y;
-        }
-
-        public int CompareTo(Ppoint other)
-        {
-            if (this.x != other.x) return (int)Math.Sign(this.x - other.x);
-            return (int)Math.Sign(this.y - other.y);
-        }
-        double IPoint.x
-        {
-            get
-            {
-                return x;
-            }
-            set
-            {
-                this.x = value;
-            }
-        }
-
-        double IPoint.y
-        {
-            get
-            {
-                return y;
-            }
-            set
-            {
-                this.y = value;
-            }
-        }
-
-    }
-
     public class OBJCreator : IWriter
     {
 
         public int write(string filename, AbstractMesh[] mesh)
         {
-            SortedList<Ppoint, int> nodes = new SortedList<Ppoint, int>();
+            SortedList<Point2D, int> nodes = new SortedList<Point2D, int>();
             if (File.Exists(filename))       //костыль, чтобы всегда создавался новый файл
                 File.Delete(filename);
             // Create a file to write to.
@@ -95,7 +50,7 @@ namespace GMESHFileStream.OBJFile
                     for (int i = 0; i < r.rows; i++)
                         for (int j = 0; j < r.colums; j++)
                         {
-                            Ppoint p = new Ppoint(r[i, j].x, r[i, j].y);
+                            Point2D p = new Point2D(r[i, j].x, r[i, j].y);
                             if (nodes.ContainsKey(p)) continue;
                             sw.Write("v");
                             sw.Write(" ");
@@ -120,10 +75,10 @@ namespace GMESHFileStream.OBJFile
                     for (int i = 0; i < nx; i++)
                         for (int j = 0; j < ny; j++)
                         {
-                            int a = nodes[new Ppoint(r[i, j].x, r[i, j].y)];
+                            int a = nodes[new Point2D(r[i, j].x, r[i, j].y)];
                             if (j < ny - 1)
                             {
-                                int b = nodes[new Ppoint(r[i, j + 1].x, r[i, j + 1].y)];
+                                int b = nodes[new Point2D(r[i, j + 1].x, r[i, j + 1].y)];
                                 edge e = new edge(a, b);
                                 if (!links.ContainsKey(e))
                                 {
@@ -138,7 +93,7 @@ namespace GMESHFileStream.OBJFile
                             }
                             if (i < nx - 1)
                             {
-                                int b = nodes[new Ppoint(r[i + 1, j].x, r[i + 1, j].y)];
+                                int b = nodes[new Point2D(r[i + 1, j].x, r[i + 1, j].y)];
                                 edge e = new edge(a, b);
                                 if (!links.ContainsKey(e))
                                 {
