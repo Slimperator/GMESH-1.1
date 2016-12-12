@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Gmesh xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Poligons>
+    <Poligon>
+      <Curves>
+        <Curve id="0" type="bezier">
+          <points>
+            <ID>0</ID>
+            <ID>5</ID>
+            <ID>6</ID>
+            <ID>1</ID>
+          </points>
+        </Curve>
+        <Curve id="1" type="line">
+          <points>
+            <ID>1</ID>
+            <ID>2</ID>
+          </points>
+        </Curve>
+        <Curve id="2" type="bezier">
+          <points>
+            <ID>2</ID>
+            <ID>7</ID>
+            <ID>8</ID>
+            <ID>3</ID>
+          </points>
+        </Curve>
+        <Curve id="3" type="bezier">
+          <points>
+            <ID>3</ID>
+            <ID>9</ID>
+            <ID>10</ID>
+            <ID>4</ID>
+          </points>
+        </Curve>
+        <Curve id="4" type="line">
+          <points>
+            <ID>4</ID>
+            <ID>0</ID>
+          </points>
+        </Curve>
+      </Curves>
+      <Points>
+        <Point id="0" x="127" y="100" />
+        <Point id="1" x="476" y="102" />
+        <Point id="2" x="436" y="356" />
+        <Point id="3" x="186" y="439" />
+        <Point id="4" x="89" y="307" />
+        <Point id="5" x="236" y="71" />
+        <Point id="6" x="309" y="173" />
+        <Point id="7" x="361" y="380.9" />
+        <Point id="8" x="272" y="352" />
+        <Point id="9" x="156.89999999999998" y="399.4" />
+        <Point id="10" x="270" y="216" />
+      </Points>
+    </Poligon>
+  </Poligons>
+</Gmesh>

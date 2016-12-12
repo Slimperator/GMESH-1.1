@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<Gmesh xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Poligons>
+    <Poligon>
+      <Curves>
+        <Curve id="0" type="line">
+          <points>
+            <ID>0</ID>
+            <ID>1</ID>
+          </points>
+        </Curve>
+        <Curve id="1" type="line">
+          <points>
+            <ID>1</ID>
+            <ID>2</ID>
+          </points>
+        </Curve>
+        <Curve id="2" type="line">
+          <points>
+            <ID>2</ID>
+            <ID>3</ID>
+          </points>
+        </Curve>
+        <Curve id="3" type="line">
+          <points>
+            <ID>3</ID>
+            <ID>4</ID>
+          </points>
+        </Curve>
+        <Curve id="4" type="line">
+          <points>
+            <ID>4</ID>
+            <ID>5</ID>
+          </points>
+        </Curve>
+        <Curve id="5" type="line">
+          <points>
+            <ID>5</ID>
+            <ID>6</ID>
+          </points>
+        </Curve>
+        <Curve id="6" type="line">
+          <points>
+            <ID>6</ID>
+            <ID>7</ID>
+          </points>
+        </Curve>
+        <Curve id="7" type="line">
+          <points>
+            <ID>7</ID>
+            <ID>8</ID>
+          </points>
+        </Curve>
+        <Curve id="8" type="line">
+          <points>
+            <ID>8</ID>
+            <ID>9</ID>
+          </points>
+        </Curve>
+        <Curve id="9" type="line">
+          <points>
+            <ID>9</ID>
+            <ID>0</ID>
+          </points>
+        </Curve>
+      </Curves>
+      <Points>
+        <Point id="0" x="177" y="254" />
+        <Point id="1" x="853" y="146" />
+        <Point id="2" x="1429" y="141" />
+        <Point id="3" x="1724" y="369" />
+        <Point id="4" x="1708" y="805" />
+        <Point id="5" x="1214" y="990" />
+        <Point id="6" x="610" y="924" />
+        <Point id="7" x="266" y="837" />
+        <Point id="8" x="56" y="531" />
+        <Point id="9" x="63" y="186" />
+      </Points>
+    </Poligon>
+  </Poligons>
+</Gmesh>
