@@ -15,6 +15,7 @@ namespace GMESH_Generator
     {
         static void Main(string[] args)
         {
+            Geometry.Contour.Contour.DefaultLenghtPart = 5;
             Buffer buffer = Buffer.getInstance();
             ICommand command = new Commands.RunTime();
             Console.Clear();
