@@ -16,7 +16,7 @@ namespace GMESH_Generator.Commands
             {Params.Close, "-cl"},
             {Params.Analizer, "-q"},
             {Params.CloseAfterRun, "-cl"},
-            {Params.OpenAfterRun, "-nc"}
+            {Params.OpenAfterRun, "-nc"},
         };
         private string[] args;
         private Buffer buffer = Buffer.getInstance();
@@ -79,10 +79,14 @@ namespace GMESH_Generator.Commands
                         buffer.AnaliseMesh = true;
                         break;
                     default:
+                        exitFlag = true;
                         break;
                 }
                 if (exitFlag == true)
+                {
+                    buffer.clearBuffer();
                     return;
+                }
             }
             if (buffer.PathRead == null || buffer.PathRead == "")
                 return;
@@ -104,9 +108,16 @@ namespace GMESH_Generator.Commands
         }
         private Params argumentSearcher(string arg)
         {
-            //ищем аргумент в словаре по значениям. Если нашли, возвращаем ключ
+            //ищем аргумент в словаре по значениям. Если нашли, возвращаем ключ. Если нет, возвращаем ничего
             string str = arg + "           "; //костылек :)
-            return keys.FirstOrDefault(t => t.Value == str.Substring(0, t.Value.Length)).Key;
+            try
+            {
+                return keys.First(t => t.Value == str.Substring(0, t.Value.Length)).Key;
+            }
+            catch
+            {
+                return Params.Nothing;
+            }
         }
     }
 }

@@ -7,6 +7,6 @@ namespace GMESH_Generator
 {
     enum Params
     {
-        SavePath, OpenPath, HelpCommand, Analizer, CloseAfterRun, OpenAfterRun, Close
+        SavePath, OpenPath, HelpCommand, Analizer, CloseAfterRun, OpenAfterRun, Close, Nothing
     }
 }
