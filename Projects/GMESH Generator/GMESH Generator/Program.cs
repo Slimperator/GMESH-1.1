@@ -15,33 +15,23 @@ namespace GMESH_Generator
     {
         static void Main(string[] args)
         {
-            Buffer buff = Buffer.getInstance();
-            for (int i = 0; i < args.Length; i++)
+            Buffer buffer = Buffer.getInstance();
+            ICommand command = new Commands.RunTime();
+            Console.Clear();
+            Console.WriteLine("### GMESH Generator v1.1 ###");
+            if (args.Length != 0)
             {
-                if (args[i] == "-o" && i != args.Length - 1)
-                {
-                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1])) && File.Exists(args[i + 1]))
-                        buff.PathRead = args[i + 1];
-                }
-                if (args[i] == "-s" && i != args.Length - 1)
-                {
-                    if (Directory.Exists(Path.GetDirectoryName(args[i + 1])))
-                        buff.PathSave = args[i + 1];
-                }
+                buffer.CloseRunTimeFlag = true;
+                buffer.Args = args;
             }
-            
-            if (buff.PathRead != null)
+            do
             {
-                if (buff.PathSave == null)
-                    buff.PathSave = Path.GetDirectoryName(buff.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buff.PathRead) + ".obj";
-                ICommand command = new Commands.Open();
+                if (buffer.Args == null)
+                {
+                    buffer.Args = Console.ReadLine().Split(' ');
+                }
                 command.callBack();
-                buff.Contour[0].lenghtOfPart = 20;               //!!!!!!!!!!!!!!!!!!!!
-                command = new Commands.MeshGenerate();
-                command.callBack();
-                command = new Commands.Save();
-                command.callBack();
-            }
+            } while (!buffer.CloseRunTimeFlag);
             Environment.Exit(0);
 
 
