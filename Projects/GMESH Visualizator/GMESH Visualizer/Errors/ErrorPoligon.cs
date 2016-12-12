@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Geometry;
+using Preprocessing;
 
 namespace Errors
 {
-    public class ErrorPoligon
+    public class ErrorPoligon:IError
     {
         private int errorId;
         private string errorMasage;
-        private List<int[]> errorPoligon;
+        private Dictionary<IPoint,int> errorPoligon;
 
-        public ErrorPoligon(int errorId, string errorMasage, List<int[]> errorPoligon)
+        public ErrorPoligon(int errorId, string errorMasage, Dictionary<IPoint,int> errorPoligon)
         {
             this.errorId = errorId;
             this.errorMasage = errorMasage;
@@ -23,10 +24,10 @@ namespace Errors
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Error Poligon:");
-            foreach(int[] i in errorPoligon)
+            foreach (KeyValuePair<IPoint, int> i in errorPoligon)
             {
-                sb.AppendFormat(" Point {0}:",errorPoligon.IndexOf(i));
-                sb.AppendFormat(" x:{0}; y:{1};", i[0], i[1]);
+                sb.AppendFormat(" Point {0}:",i.Value);
+                sb.AppendFormat(" x:{0}; y:{1};", i.Key.x, i.Key.y);
             }
             sb.AppendLine(" error ID = " + errorId + ";" +
                 " Error Masage: " + errorMasage + ";");
