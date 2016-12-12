@@ -6,12 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Geometry;
+using Errors;
+using Analyzer;
+using Parcer;
 
-namespace Prototype
+namespace GMESH_Visualizer
 {
-    public partial class Form1 : Form
+    public partial class GmeshVisualizer : Form
     {
-        public Form1()
+        Buffer buffer = Buffer.getInstance();
+        public GmeshVisualizer()
         {
             InitializeComponent();
         }
@@ -84,6 +89,11 @@ namespace Prototype
         private void clearButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void updateMeshInfoDataGridSetView(List<Errors.IError> errors)
+        {
+            this.MeshInfoDataGridView.
         }
     }
 }
