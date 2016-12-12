@@ -6,7 +6,7 @@ using Geometry;
 
 namespace Errors
 {
-    class ErrorCurve: IError
+    public class ErrorCurve: IError
     {
         private int errorId;
         private string errorMasage;

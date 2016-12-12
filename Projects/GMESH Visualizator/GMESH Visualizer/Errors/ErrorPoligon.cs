@@ -6,7 +6,7 @@ using Geometry;
 
 namespace Errors
 {
-    class ErrorPoligon
+    public class ErrorPoligon
     {
         private int errorId;
         private string errorMasage;
