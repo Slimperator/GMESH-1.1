@@ -7,9 +7,9 @@ namespace Geometry.Contour
 {
     public class Contour:IContour
     {
-        public static double DefaultLenghtPart;
+        public static double DefaultLenghtPart = 0;
         private ICurve[] Curves;
-        public static double LenghtOfPart = DefaultLenghtPart; //костылек :)
+        private double LenghtOfPart = DefaultLenghtPart; //костылек :)
         public Contour(ICurve[] curves)
         {
             this.Curves = curves;
