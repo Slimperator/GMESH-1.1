@@ -13,7 +13,7 @@ namespace GMESH_Visualizer
         // status= 1 - ярко-красный
         double status; // оценка квадратика          
 
-        public Color GetCellColor(double status)
+        public static Color GetCellColor(double status)
         {
             // если status придёт =-1, то вернётся серый цвет
             if (status == -1) return Color.Gray;
