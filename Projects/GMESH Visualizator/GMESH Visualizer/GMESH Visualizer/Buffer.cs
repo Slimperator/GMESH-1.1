@@ -11,11 +11,11 @@ namespace GMESH_Visualizer
     public class Buffer
     {
         static Buffer instance = null;
-        List<IPoint> points { get; set; }
-        List<ICurve> lines { get; set; }
-        List<IError> errors { get; set; }
-        List<IContour> contour { get; set; }
-        graph graph { get; set; }
+        public List<IPoint> points { get; set; }
+        public List<ICurve> lines { get; set; }
+        public List<IError> errors { get; set; }
+        public List<IContour> contour { get; set; }
+        public graph.edge[][] graph { get; set; }
 
         private Buffer()
         { }
