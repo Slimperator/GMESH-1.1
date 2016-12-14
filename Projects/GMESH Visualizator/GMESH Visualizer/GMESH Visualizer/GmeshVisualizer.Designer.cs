@@ -52,13 +52,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MESHDisplay = new System.Windows.Forms.PictureBox();
             this.MeshInfoDataGridView = new System.Windows.Forms.DataGridView();
             this.ImageErrorType = new System.Windows.Forms.DataGridViewImageColumn();
             this.ErrorInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MESHDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MeshInfoDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -251,14 +251,15 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pictureBox1
+            // MESHDisplay
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 41);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(474, 354);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.MESHDisplay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.MESHDisplay.Location = new System.Drawing.Point(12, 41);
+            this.MESHDisplay.Name = "MESHDisplay";
+            this.MESHDisplay.Size = new System.Drawing.Size(474, 354);
+            this.MESHDisplay.TabIndex = 5;
+            this.MESHDisplay.TabStop = false;
+            this.MESHDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.MESHDisplay_Paint);
             // 
             // MeshInfoDataGridView
             // 
@@ -298,7 +299,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(901, 494);
             this.Controls.Add(this.MeshInfoDataGridView);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.MESHDisplay);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clearButton);
@@ -311,7 +312,7 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MESHDisplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MeshInfoDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -343,7 +344,7 @@
         private System.Windows.Forms.ToolStripMenuItem meshToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox MESHDisplay;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.DataGridView MeshInfoDataGridView;
         private System.Windows.Forms.DataGridViewImageColumn ImageErrorType;
