@@ -8,10 +8,10 @@ using Errors;
 
 namespace Analitics
 {
-    class OBjMeshAnalitic
+    public class OBjMeshAnalitic
     {
         public readonly int rate;
-        public OBjMeshAnalitic(int rate) { this.rate = rate; }
+        public OBjMeshAnalitic() {}
 
         public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints)
         {
