@@ -50,17 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffer.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="GmeshVisualizer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GmeshVisualizer.Designer.cs">
+      <DependentUpon>GmeshVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="GmeshVisualizer.resx">
+      <DependentUpon>GmeshVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,6 +85,10 @@
     <ProjectReference Include="..\..\..\GMESH Generator\Geometry\Geometry.csproj">
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Analitics\Analitics.csproj">
+      <Project>{9ADACE07-9290-4636-B6C2-88C585B94D02}</Project>
+      <Name>Analitics</Name>
     </ProjectReference>
     <ProjectReference Include="..\Errors\Errors.csproj">
       <Project>{FDC5FC78-DE79-485F-ABC7-D07A6738DCFA}</Project>
