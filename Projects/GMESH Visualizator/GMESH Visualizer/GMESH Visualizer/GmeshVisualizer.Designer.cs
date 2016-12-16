@@ -38,17 +38,11 @@
             this.meshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pentagonOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decomposeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decomposeOnTrianglesAndTetragonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decomposeWithStarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buildButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -56,6 +50,7 @@
             this.MeshInfoDataGridView = new System.Windows.Forms.DataGridView();
             this.ImageErrorType = new System.Windows.Forms.DataGridViewImageColumn();
             this.ErrorInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MeshGradLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MESHDisplay)).BeginInit();
@@ -65,8 +60,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.pentagonOptionsToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(901, 24);
@@ -89,7 +83,7 @@
             this.contourToolStripMenuItem1,
             this.meshToolStripMenuItem1});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // contourToolStripMenuItem1
@@ -113,7 +107,7 @@
             this.meshToolStripMenuItem,
             this.infoToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // contourToolStripMenuItem
@@ -139,46 +133,8 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // pentagonOptionsToolStripMenuItem
-            // 
-            this.pentagonOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.decomposeToolStripMenuItem,
-            this.decomposeOnTrianglesAndTetragonToolStripMenuItem,
-            this.decomposeWithStarToolStripMenuItem});
-            this.pentagonOptionsToolStripMenuItem.Name = "pentagonOptionsToolStripMenuItem";
-            this.pentagonOptionsToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
-            this.pentagonOptionsToolStripMenuItem.Text = "Pentagon Options";
-            // 
-            // decomposeToolStripMenuItem
-            // 
-            this.decomposeToolStripMenuItem.Name = "decomposeToolStripMenuItem";
-            this.decomposeToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.decomposeToolStripMenuItem.Text = "Decompose  on triangles";
-            // 
-            // decomposeOnTrianglesAndTetragonToolStripMenuItem
-            // 
-            this.decomposeOnTrianglesAndTetragonToolStripMenuItem.Name = "decomposeOnTrianglesAndTetragonToolStripMenuItem";
-            this.decomposeOnTrianglesAndTetragonToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.decomposeOnTrianglesAndTetragonToolStripMenuItem.Text = "Decompose on triangles and tetragon";
-            // 
-            // decomposeWithStarToolStripMenuItem
-            // 
-            this.decomposeWithStarToolStripMenuItem.Name = "decomposeWithStarToolStripMenuItem";
-            this.decomposeWithStarToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.decomposeWithStarToolStripMenuItem.Text = "Decompose with star";
-            // 
-            // buildButton
-            // 
-            this.buildButton.Location = new System.Drawing.Point(60, 431);
-            this.buildButton.Name = "buildButton";
-            this.buildButton.Size = new System.Drawing.Size(76, 24);
-            this.buildButton.TabIndex = 1;
-            this.buildButton.Text = "Build";
-            this.buildButton.UseVisualStyleBackColor = true;
-            this.buildButton.Click += new System.EventHandler(this.buildButton_Click);
             // 
             // clearButton
             // 
@@ -200,9 +156,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.MeshGradLabel);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(520, 41);
             this.panel1.Name = "panel1";
@@ -228,15 +184,6 @@
             this.label2.Size = new System.Drawing.Size(125, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Информация о контуре";
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.textBox4.Location = new System.Drawing.Point(212, 75);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 3;
             // 
             // textBox1
             // 
@@ -293,6 +240,15 @@
             this.ErrorInfo.Name = "ErrorInfo";
             this.ErrorInfo.ReadOnly = true;
             // 
+            // MeshGradLabel
+            // 
+            this.MeshGradLabel.AutoSize = true;
+            this.MeshGradLabel.Location = new System.Drawing.Point(209, 78);
+            this.MeshGradLabel.Name = "MeshGradLabel";
+            this.MeshGradLabel.Size = new System.Drawing.Size(27, 13);
+            this.MeshGradLabel.TabIndex = 8;
+            this.MeshGradLabel.Text = "N/A";
+            // 
             // GmeshVisualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,7 +259,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.buildButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GmeshVisualizer";
@@ -325,16 +280,10 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pentagonOptionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decomposeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decomposeOnTrianglesAndTetragonToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decomposeWithStarToolStripMenuItem;
-        private System.Windows.Forms.Button buildButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem contourToolStripMenuItem1;
@@ -349,6 +298,7 @@
         private System.Windows.Forms.DataGridView MeshInfoDataGridView;
         private System.Windows.Forms.DataGridViewImageColumn ImageErrorType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ErrorInfo;
+        private System.Windows.Forms.Label MeshGradLabel;
     }
 }
 

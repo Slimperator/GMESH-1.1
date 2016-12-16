@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="OBjMeshAnalitic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\GMESH Generator\Geometry\Geometry.csproj">
