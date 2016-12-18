@@ -12,11 +12,12 @@ namespace Analitics
     {
         public readonly int rate;
         public OBjMeshAnalitic() {}
+        List<IError> errors = new List<IError>();
 
         public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints)
         {
             List<int> pows = new List<int>();
-            List<IError> errors = new List<IError>();
+            
             Dictionary<int, int> pointsRate = new Dictionary<int, int>();
             foreach (Preprocessing.graph.edge[] array in graph)
             {
@@ -47,7 +48,27 @@ namespace Analitics
                 if (!(point.Value == 4 || point.Value == 2 || point.Value == 8))
                     errors.Add(new ErrorPoint(1, "wrong point rate", myLittlePoints[point.Key]));
             }
+            
+            foreach (ICurve i in curvesNeeded)
+            {
+                foreach (ICurve j in curvesNeeded)
+                {
+                    if (j == i) continue;
+                    if (Tools.lineIntersectionCheck(i.getPoint(0.0), i.getPoint(1.0), j.getPoint(0.0), j.getPoint(1.0)) == true)
+                    {
+                        addErrorLineInErrorList(new ErrorCurve(1, "there is INTERSECTION!", i));
+                        addErrorLineInErrorList(new ErrorCurve(2, "there is INTERSECTION!", j));
+                    }
+                }
+            }
             return errors;
+        }
+        private void addErrorLineInErrorList(IError error)
+        {
+            if (!errors.Exists(t => t == error))
+            {
+                errors.Add(error);
+            }
         }
 
     }
