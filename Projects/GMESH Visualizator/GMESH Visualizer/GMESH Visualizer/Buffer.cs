@@ -14,7 +14,7 @@ namespace GMESH_Visualizer
         public List<IPoint> points { get; set; }
         public List<ICurve> lines { get; set; }
         public List<IError> errors { get; set; }
-        public List<IContour> contour { get; set; }
+        public IContour contour { get; set; }
         public graph.edge[][] graph { get; set; }
         public double meshGrad { get; set; }
 
