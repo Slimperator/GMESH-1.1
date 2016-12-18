@@ -21,7 +21,8 @@ namespace GMESH_Visualizer
         IReader reader; //= new ObjReader();                             //читалка
         Gradient gradient = new Gradient();                              //градиент
         IGrade gradeAnalise = new Analyzer.Grade.ArithmMeanGrade();      //оценка качества
-
+        IError selectError = null;                                       //текущая выбранная ошибка (которая будет подсчевиваться)
+        
         public GmeshVisualizer()
         {
             InitializeComponent();
@@ -115,13 +116,46 @@ namespace GMESH_Visualizer
         private void MESHDisplay_Paint(object sender, PaintEventArgs e)
         {
             //рисуем точки
-            foreach(IPoint point in buffer.points)
-                e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x)-3, Convert.ToSingle(point.y)-3, 6, 6);
+            foreach (IPoint point in buffer.points)
+            {
+                //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
+                if (buffer.errors.Exists(t => t.getErrorObjectHesh() == point.GetHashCode()))
+                    e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+                else
+                e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+            }
             //рисуем линии
             foreach (ICurve curve in buffer.lines)
-                e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y), 
+            {
+                //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
+                if (buffer.errors.Exists(t => t.getErrorObjectHesh() == curve.GetHashCode()))
+                    e.Graphics.DrawLine(Pens.Red, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
+    Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
+                else
+                e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
                     Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
-            
+            }
+            //рисуем контур, если он есть
+            if (buffer.contour != null)
+            {
+                for(int i = 0; i<buffer.contour.getSize(); i++)
+                    e.Graphics.DrawLine(Pens.Blue, Convert.ToSingle(buffer.contour[i].getPoint(0).x), Convert.ToSingle(buffer.contour[i].getPoint(0).y),
+                    Convert.ToSingle(buffer.contour[i].getPoint(1).x), Convert.ToSingle(buffer.contour[i].getPoint(1).y));
+            }
+            //выделяем элемент, если есть выделенный
+            if (selectError != null)
+            {
+                if(selectError.getErrorObjectType() == "curve")
+                    foreach (ICurve curve in buffer.lines)
+                        if (selectError.getErrorObjectHesh() == curve.GetHashCode())
+                            e.Graphics.DrawLine(new Pen(Color.Red,3), Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
+            Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
+
+                if(selectError.getErrorObjectType() == "point")
+                    foreach (IPoint point in buffer.points)
+                        if (selectError.getErrorObjectHesh() == point.GetHashCode())
+                            e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 10, 10);
+            }
             //в цикл ниже добавить закраску ячеек
             //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
             double grad = 0;
@@ -134,6 +168,17 @@ namespace GMESH_Visualizer
             buffer.meshGrad = grad / buffer.graph.Length;
 
             MESHDisplay.Refresh();
+        }
+
+        private void MeshInfoDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //если в буфере ошибок ошибок нет, или их меньше ячеек, а запись ячейки есть, то ошибка
+            if (buffer.errors == null || buffer.errors.Count <= e.RowIndex)
+                return;
+            //ставим в текущую ошибку ошибку из буффера с индексом строки, чтобы выделить её на экране жирненьким
+            selectError = buffer.errors[e.RowIndex];
+            //обновляем дисплей
+            MESHDisplay.Invalidate();
         }
     }
 }

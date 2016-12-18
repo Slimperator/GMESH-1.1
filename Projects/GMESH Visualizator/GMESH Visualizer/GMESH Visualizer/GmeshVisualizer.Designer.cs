@@ -41,6 +41,7 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MeshGradLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -50,7 +51,6 @@
             this.MeshInfoDataGridView = new System.Windows.Forms.DataGridView();
             this.ImageErrorType = new System.Windows.Forms.DataGridViewImageColumn();
             this.ErrorInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MeshGradLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MESHDisplay)).BeginInit();
@@ -83,7 +83,7 @@
             this.contourToolStripMenuItem1,
             this.meshToolStripMenuItem1});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // contourToolStripMenuItem1
@@ -107,7 +107,7 @@
             this.meshToolStripMenuItem,
             this.infoToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // contourToolStripMenuItem
@@ -133,7 +133,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // clearButton
@@ -164,6 +164,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(369, 148);
             this.panel1.TabIndex = 4;
+            // 
+            // MeshGradLabel
+            // 
+            this.MeshGradLabel.AutoSize = true;
+            this.MeshGradLabel.Location = new System.Drawing.Point(209, 78);
+            this.MeshGradLabel.Name = "MeshGradLabel";
+            this.MeshGradLabel.Size = new System.Drawing.Size(27, 13);
+            this.MeshGradLabel.TabIndex = 8;
+            this.MeshGradLabel.Text = "N/A";
             // 
             // label5
             // 
@@ -223,6 +232,7 @@
             this.MeshInfoDataGridView.ReadOnly = true;
             this.MeshInfoDataGridView.Size = new System.Drawing.Size(369, 248);
             this.MeshInfoDataGridView.TabIndex = 6;
+            this.MeshInfoDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.MeshInfoDataGridView_RowEnter);
             // 
             // ImageErrorType
             // 
@@ -239,15 +249,6 @@
             this.ErrorInfo.HeaderText = "Error Info";
             this.ErrorInfo.Name = "ErrorInfo";
             this.ErrorInfo.ReadOnly = true;
-            // 
-            // MeshGradLabel
-            // 
-            this.MeshGradLabel.AutoSize = true;
-            this.MeshGradLabel.Location = new System.Drawing.Point(209, 78);
-            this.MeshGradLabel.Name = "MeshGradLabel";
-            this.MeshGradLabel.Size = new System.Drawing.Size(27, 13);
-            this.MeshGradLabel.TabIndex = 8;
-            this.MeshGradLabel.Text = "N/A";
             // 
             // GmeshVisualizer
             // 
