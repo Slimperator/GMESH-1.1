@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<Gmesh xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Poligons>
+    <Poligon>
+      <Curves>
+        <Curve id="0" type="bezier">
+          <points>
+            <ID>0</ID>
+            <ID>8</ID>
+            <ID>9</ID>
+            <ID>1</ID>
+          </points>
+        </Curve>
+        <Curve id="1" type="bezier">
+          <points>
+            <ID>1</ID>
+            <ID>10</ID>
+            <ID>11</ID>
+            <ID>2</ID>
+          </points>
+        </Curve>
+        <Curve id="2" type="bezier">
+          <points>
+            <ID>2</ID>
+            <ID>12</ID>
+            <ID>13</ID>
+            <ID>3</ID>
+          </points>
+        </Curve>
+        <Curve id="3" type="bezier">
+          <points>
+            <ID>3</ID>
+            <ID>14</ID>
+            <ID>15</ID>
+            <ID>4</ID>
+          </points>
+        </Curve>
+        <Curve id="4" type="bezier">
+          <points>
+            <ID>4</ID>
+            <ID>16</ID>
+            <ID>17</ID>
+            <ID>5</ID>
+          </points>
+        </Curve>
+        <Curve id="5" type="line">
+          <points>
+            <ID>5</ID>
+            <ID>0</ID>
+          </points>
+        </Curve>
+      </Curves>
+      <Points>
+        <Point id="0" x="181" y="97" />
+        <Point id="1" x="487" y="103" />
+        <Point id="2" x="630" y="343" />
+        <Point id="3" x="494" y="523" />
+        <Point id="4" x="179" y="519" />
+        <Point id="5" x="47" y="348" />
+        <Point id="6" x="46" y="229" />
+        <Point id="7" x="204" y="246" />
+        <Point id="8" x="277" y="220" />
+        <Point id="9" x="364.6" y="100.6" />
+        <Point id="10" x="529.9" y="175" />
+        <Point id="11" x="430" y="327" />
+        <Point id="12" x="589.2" y="397" />
+        <Point id="13" x="412" y="408" />
+        <Point id="14" x="393" y="598" />
+        <Point id="15" x="305" y="520.6" />
+        <Point id="16" x="139.4" y="467.69999999999993" />
+        <Point id="17" x="19" y="533" />
+      </Points>
+    </Poligon>
+  </Poligons>
+</Gmesh>

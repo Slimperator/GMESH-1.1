@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GMESHFileStream;
+using System.IO;
 
 namespace GMESH_Generator.Commands
 {
@@ -20,6 +21,17 @@ namespace GMESH_Generator.Commands
                 return;
             Console.WriteLine("Пишем сетку...");
             writer.write(storage.PathSave,storage.Meshs);             //сохраняем
+            if (storage.AnaliseMesh == true)
+            {
+                string path = Path.GetDirectoryName(storage.PathRead) + @"\" + Path.GetFileNameWithoutExtension(storage.PathRead) + "GradAnalize.txt";
+                File.Create(path);
+                using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(path, true))
+                {
+                    file.WriteLine(Convert.ToSingle(storage.MeshsEstimate));
+                }
+                storage.AnaliseMesh = false;
+            }
         }
     }
 }

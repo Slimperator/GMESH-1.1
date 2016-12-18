@@ -11,7 +11,10 @@ namespace GMESH_Generator
         private static Buffer instance;
         private List <IContour> contour = new List<IContour>();
         private List<AbstractMesh> meshs = new List<AbstractMesh>();
+        private string[] args;
         private String pathToSave, pathToRead;
+        private bool closeRunTimeFlag = false, analiseMesh = false;
+        private double meshsEstimate = -1;
         public Buffer() { }
         public static Buffer getInstance()
         {
@@ -40,6 +43,36 @@ namespace GMESH_Generator
         {
             get { return pathToRead; }
             set { this.pathToRead = value; }
+        }
+        public string[] Args
+        {
+            get { return this.args; }
+            set { this.args = value; }
+        }
+        public bool CloseRunTimeFlag
+        {
+            get { return this.closeRunTimeFlag; }
+            set { this.closeRunTimeFlag = value; }
+        }
+        public bool AnaliseMesh
+        {
+            get { return this.analiseMesh; }
+            set { this.analiseMesh = value; }
+        }
+        public double MeshsEstimate
+        {
+            get { return this.meshsEstimate; }
+            set { this.meshsEstimate = value; }
+        }
+        public void clearBuffer()
+        {
+            contour = new List<IContour>();
+            meshs = new List<AbstractMesh>();
+            args = null;
+            pathToRead = null;
+            pathToSave = null;
+            analiseMesh = false;
+            meshsEstimate = 0;
         }
     }
 }

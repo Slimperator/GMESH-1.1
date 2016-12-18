@@ -12,6 +12,24 @@ namespace Geometry.Curve
         private IPoint[] cutPoints;
         private double Lenght;
         private double[] CutParams;
+
+        public Relocate(ICurve curve, IPoint newA, IPoint newB)
+        {
+            this.newA = newA;
+            this.newB = newB;
+            this.curve = curve;
+            this.lenght = Math.Round(Tools.length(this), 4);
+        }
+
+        public IPoint getPoint(double t)
+        {
+            IPoint A = this.curve.getPoint(0);
+            IPoint B = this.curve.getPoint(1);
+            IPoint NewPoint = this.curve.getPoint(t);
+            NewPoint.x += (1 - t) * (this.newA.x - A.x) + t * (this.newB.x - B.x);
+            NewPoint.y += (1 - t) * (this.newA.y - A.y) + t * (this.newB.y - B.y);
+            return NewPoint;
+        }
         public double[] cutParams
         {
             get
@@ -29,7 +47,7 @@ namespace Geometry.Curve
             {
                 return this.Lenght;
             }
-            set
+            private set
             {
                 this.Lenght = value;
             }
@@ -38,21 +56,6 @@ namespace Geometry.Curve
         {
             get { return this.cutPoints; }
             set { this.cutPoints = value; }
-        }
-        public Relocate(ICurve curve, IPoint newA, IPoint newB)
-        {
-            this.newA = newA;
-            this.newB = newB;
-            this.curve = curve;
-        }
-        public IPoint getPoint(double t)
-        {
-            IPoint A = this.curve.getPoint(0);
-            IPoint B = this.curve.getPoint(1);
-            IPoint NewPoint = this.curve.getPoint(t);
-            NewPoint.x += (1 - t) * (this.newA.x - A.x) + t * (this.newB.x - B.x);
-            NewPoint.y += (1 - t) * (this.newA.y - A.y) + t * (this.newB.y - B.y);
-            return NewPoint;
         }
     }
 }

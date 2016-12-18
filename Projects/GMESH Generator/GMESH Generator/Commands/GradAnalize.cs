@@ -13,7 +13,7 @@ namespace GMESH_Generator.Commands
         private IGrade grade = new ArithmMeanGrade();
         private GMESHFileStream.IWriter writer = new GMESHFileStream.OBJFile.OBJCreator();
 
-        private double estimate;
+        private double estimate = 0;
         public double Estimate
         {
             get { return estimate; }
@@ -28,8 +28,10 @@ namespace GMESH_Generator.Commands
         {
             if (storage.Meshs == null || storage.PathSave == null)   //проверяем, есть ли что сохранять, и есть ли куда сохранять
                 return;
-
-            estimate = grade.calculate(storage.Meshs[0]);
+            foreach(var x in storage.Meshs)
+                estimate += grade.calculate(x);
+            estimate = estimate / storage.Meshs.Length;
+            storage.MeshsEstimate = estimate;
         }
     }
 }

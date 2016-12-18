@@ -13,6 +13,20 @@ namespace Geometry.Curve
         private IPoint[] CutPoints;
         private double Lenght;
         private double[] CutParams;
+        public Morph(ICurve a, ICurve b, double alpha)
+        {
+            this.a = a;
+            this.b = b;
+            this.alpha = alpha;
+            this.lenght = Math.Round(Tools.length(this), 4);
+        }
+
+        public IPoint getPoint(double t)
+        {
+            IPoint A = a.getPoint(1 - t);
+            IPoint B = b.getPoint(t);
+            return new Point.Point2D(this.alpha * A.x + (1 - this.alpha) * B.x, this.alpha * A.y + (1 - this.alpha) * B.y);
+        }
         public double[] cutParams
         {
             get
@@ -30,25 +44,11 @@ namespace Geometry.Curve
             {
                 return this.Lenght;
             }
-            set
+            private set
             {
                 this.Lenght = value;
             }
         }
-        public Morph(ICurve a, ICurve b, double alpha)
-        {
-            this.a = a;
-            this.b = b;
-            this.alpha = alpha;
-        }
-
-        public IPoint getPoint(double t)
-        {
-            IPoint A = a.getPoint(1 - t);
-            IPoint B = b.getPoint(t);
-            return new Point.Point2D(this.alpha * A.x + (1 - this.alpha) * B.x, this.alpha * A.y + (1 - this.alpha) * B.y);
-        }
-
         public IPoint[] cutPoints
         {
             get

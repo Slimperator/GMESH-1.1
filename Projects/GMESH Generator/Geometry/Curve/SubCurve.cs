@@ -14,17 +14,8 @@ namespace Geometry.Curve
         private IPoint[] CutPoints;
         private double Lenght;
         private double[] CutParams;
-        public double[] cutParams
-        {
-            get
-            {
-                return this.CutParams;
-            }
-            set
-            {
-                this.CutParams = value;
-            }
-        }
+        private int countPointsParentCurve;
+
         public SubCurve(ICurve mainCurve, double paramTBegin, double paramTEnd)
         {
             this.mainCurve = mainCurve;
@@ -32,7 +23,6 @@ namespace Geometry.Curve
             this.paramEnd = paramTEnd;
             begin = this.mainCurve.getPoint(paramBegin);
             end = this.mainCurve.getPoint(paramEnd);
-            this.Lenght = mainCurve.lenght;
             Initialize();
         }
         public SubCurve(ICurve mainCurve, IPoint Begin, IPoint End)
@@ -42,9 +32,9 @@ namespace Geometry.Curve
             this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == End.x && x.y == End.y)];
             begin = Begin;
             end = End;
-            this.Lenght = mainCurve.lenght;
             Initialize();
         }
+
         private void Initialize()
         {
             if (paramBegin > paramEnd)
@@ -57,6 +47,7 @@ namespace Geometry.Curve
                 max = paramEnd;
                 min = paramBegin;
             }
+            this.countPointsParentCurve = mainCurve.cutPoints.Length;
             List<IPoint> ps = new List<IPoint>();                   //формируем массив точек-разделителей на основе исходной кривой
             List<double> pt = new List<double>();
 
@@ -71,16 +62,14 @@ namespace Geometry.Curve
                 
             CutParams = pt.ToArray();
             CutPoints = ps.ToArray();
+            this.Lenght = Math.Round(Tools.length(this), 4);
         }
-        public IPoint getPoint(double t)
-        {
-            return this.mainCurve.getPoint(t * (max - min) + min);
-        }
-
         public IPoint[] cutPoints
         {
             get
             {
+                if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
+                    Initialize();
                 return this.CutPoints;
             }
             set
@@ -88,16 +77,46 @@ namespace Geometry.Curve
                 this.CutPoints = value;
             }
         }
-        double  ICurve.lenght
+        public double[] cutParams
+        {
+            get
+            {
+                return this.CutParams;
+            }
+            set
+            {
+                this.CutParams = value;
+            }
+        }
+        public IPoint getPoint(double t)
+        {
+            if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
+                Initialize();
+            return this.mainCurve.getPoint(t * (max - min) + min);
+        }
+        public double lenght
         {
 	        get 
 	        { 
 		        return this.Lenght; 
 	        }
-	        set 
-	        { 
-		        throw new NotImplementedException(); 
+	        private set 
+	        {
+                this.Lenght = value; 
 	        }
+        }
+        //Функция проверяет, не изменился ли кривая-родитель. Если кривая родитель изменилась, тогда возвращает true
+        private bool notifyParent()
+        {
+            bool changeFlag = false;
+            if (mainCurve.cutPoints.Length != countPointsParentCurve)
+                return true;
+            foreach (IPoint p in this.CutPoints)
+            {
+                if (Array.IndexOf(mainCurve.cutPoints,p) == -1)
+                    changeFlag = true;
+            }
+            return changeFlag;
         }
     }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Gmesh xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Poligons>
+    <Poligon>
+      <Curves>
+        <Curve id="0" type="line">
+          <points>
+            <ID>0</ID>
+            <ID>1</ID>
+          </points>
+        </Curve>
+        <Curve id="1" type="line">
+          <points>
+            <ID>1</ID>
+            <ID>2</ID>
+          </points>
+        </Curve>
+        <Curve id="2" type="line">
+          <points>
+            <ID>2</ID>
+            <ID>3</ID>
+          </points>
+        </Curve>
+        <Curve id="3" type="line">
+          <points>
+            <ID>3</ID>
+            <ID>4</ID>
+          </points>
+        </Curve>
+        <Curve id="4" type="line">
+          <points>
+            <ID>4</ID>
+            <ID>5</ID>
+          </points>
+        </Curve>
+        <Curve id="5" type="line">
+          <points>
+            <ID>5</ID>
+            <ID>0</ID>
+          </points>
+        </Curve>
+      </Curves>
+      <Points>
+        <Point id="0" x="157" y="108" />
+        <Point id="1" x="401" y="97" />
+        <Point id="2" x="551" y="117" />
+        <Point id="3" x="526" y="387" />
+        <Point id="4" x="152" y="467" />
+        <Point id="5" x="53" y="268" />
+      </Points>
+    </Poligon>
+  </Poligons>
+</Gmesh>
