@@ -8,5 +8,7 @@ namespace Errors
     public interface IError
     {
         string getInfo();
+        int getErrorObjectHesh();
+        string getErrorObjectType();
     }
 }

@@ -33,5 +33,16 @@ namespace Errors
                 " Error Masage: " + errorMasage + ";");
             return sb.ToString();
         }
+
+        public int getErrorObjectHesh()
+        {
+            return this.errorPoligon.GetHashCode();
+        }
+
+
+        public string getErrorObjectType()
+        {
+            return "poligon";
+        }
     }
 }

@@ -27,5 +27,17 @@ namespace Errors
                 " Error Masage: " + errorMasage + ";";
             return error;
         }
+
+
+        public int getErrorObjectHesh()
+        {
+            return this.errorCurve.GetHashCode();
+        }
+
+
+        public string getErrorObjectType()
+        {
+            return "curve";
+        }
     }
 }
