@@ -11,7 +11,7 @@ namespace Parcer
 {
     public class ObjReader : IReader
     {
-        void read(string path, out List<IPoint> listPoint, out List<ICurve> listCurve, out Preprocessing.graph.edge[][] meshCells)
+        public void read(string path, out List<IPoint> listPoint, out List<ICurve> listCurve, out Preprocessing.graph.edge[][] meshCells)
         {
 
             listPoint = new List<IPoint>();//сюдабудем писать вершинки
