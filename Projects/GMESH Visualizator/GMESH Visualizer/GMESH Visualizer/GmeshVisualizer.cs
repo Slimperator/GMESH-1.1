@@ -106,6 +106,7 @@ namespace GMESH_Visualizer
             textBox1.Text = null;
             MeshGradLabel.Text = null;
             buffer.clearBuffer();
+            Refresh();
         }
 
         private void tryAnaliseMesh()
