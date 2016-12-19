@@ -106,6 +106,8 @@ namespace GMESH_Visualizer
             textBox1.Text = null;
             MeshGradLabel.Text = null;
             buffer.clearBuffer();
+            MeshInfoDataGridView.DataSource = null;
+            MeshInfoDataGridView.Rows.Clear();
             Refresh();
         }
 
