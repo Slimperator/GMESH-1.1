@@ -9,9 +9,9 @@ using System.IO;
 
 namespace Parcer
 {
-    public class ObjReader
+    public class ObjReader : IReader
     {
-        public void objReader(string path, out List<IPoint> listPoint, out List<ICurve> listCurve)
+        void read(string path, out List<IPoint> listPoint, out List<ICurve> listCurve, out Preprocessing.graph.edge[][] meshCells)
         {
 
             listPoint = new List<IPoint>();//сюдабудем писать вершинки
@@ -45,9 +45,10 @@ namespace Parcer
 
 
                 }
-                graph Gr = Preprocessing.graph.construct(someInts.ToArray());
-                Preprocessing.alg.cycles(Gr);
+                
             }
+            graph Gr = Preprocessing.graph.construct(someInts.ToArray());
+            meshCells = Preprocessing.alg.cycles(Gr);
             
         }
 
