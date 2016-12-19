@@ -31,31 +31,20 @@ namespace Analitics
                 }
                 foreach (Preprocessing.graph.edge elem in array)
                 {
-                    try
-                    {
-                        var r = pointsRate.First(t => t.Key == elem.a);
-                        pointsRate[r.Key] = r.Value + 1;
-                    }
-                    catch
-                    {
+                    if(pointsRate.ContainsKey(elem.a))
+                        pointsRate[elem.a] = pointsRate[elem.a] + 1;
+                    else
                         pointsRate.Add(elem.a, 1);
-                    }
-                    try
-                    {
-                        var r = pointsRate.First(t => t.Key == elem.b);
-                        pointsRate[r.Key] = r.Value + 1;
-                    }
-                    catch
-                    {
+                    if(pointsRate.ContainsKey(elem.b))
+                        pointsRate[elem.b] = pointsRate[elem.b] + 1;
+                    else
                         pointsRate.Add(elem.b, 1);
-                    }
                 }
             }
 
-
             foreach (KeyValuePair<int, int> point in pointsRate)
             {
-                if (point.Value > 4 || point.Value < 2)
+                if (!(point.Value == 4 || point.Value == 2 || point.Value == 8))
                     errors.Add(new ErrorPoint(1, "wrong point rate", myLittlePoints[point.Key]));
             }
             return errors;
