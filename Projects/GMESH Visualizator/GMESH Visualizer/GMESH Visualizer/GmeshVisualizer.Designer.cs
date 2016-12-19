@@ -216,6 +216,7 @@
             this.MESHDisplay.TabIndex = 5;
             this.MESHDisplay.TabStop = false;
             this.MESHDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.MESHDisplay_Paint);
+            this.MESHDisplay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MESHDisplay_MouseClick);
             // 
             // MeshInfoDataGridView
             // 
