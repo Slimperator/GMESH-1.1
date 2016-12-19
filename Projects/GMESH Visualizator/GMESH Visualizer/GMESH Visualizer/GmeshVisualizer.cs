@@ -110,7 +110,7 @@ namespace GMESH_Visualizer
 
         private void tryAnaliseMesh()
         {
-            buffer.errors = analitica.doAnalitics(buffer.graph, buffer.points);
+            buffer.errors = analitica.doAnalitics(buffer.graph, buffer.points, buffer.lines);
         }
 
         private void updateMeshInfoDataGridSetView()
