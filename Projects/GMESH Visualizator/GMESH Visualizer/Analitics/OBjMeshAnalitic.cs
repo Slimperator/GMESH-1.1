@@ -14,7 +14,7 @@ namespace Analitics
         public OBjMeshAnalitic() {}
         List<IError> errors = new List<IError>();
 
-        public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints)
+        public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints, List<ICurve> curvesNeeded)
         {
             List<int> pows = new List<int>();
             
