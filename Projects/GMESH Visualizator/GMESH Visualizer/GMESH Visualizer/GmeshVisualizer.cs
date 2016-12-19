@@ -101,7 +101,11 @@ namespace GMESH_Visualizer
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            
+            MESHDisplay.Image = null;
+            MESHDisplay.Invalidate();
+            textBox1.Text = null;
+            MeshGradLabel.Text = null;
+            buffer.clearBuffer();
         }
 
         private void tryAnaliseMesh()
