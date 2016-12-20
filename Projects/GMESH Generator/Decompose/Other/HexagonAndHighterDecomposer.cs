@@ -17,7 +17,6 @@ namespace Decompose.Other
 
         public Geometry.IContour[] decompose(Geometry.IContour contour)
         {
-            List<IContour> Contours = new List<IContour>();
             //проверяем, нужно ли количество углов
             size = contour.getSize();
             if (size < 6)
@@ -25,6 +24,7 @@ namespace Decompose.Other
             //формируем контура 
             for (int i = 0; i < size; i++)
             {
+                List<IContour> Contours = new List<IContour>();
                 Contours.AddRange(getNewContours(contour));
                 double t = takeMyBreathAway(Contours);
                 if (bestGrad < t)
@@ -34,7 +34,7 @@ namespace Decompose.Other
                     contour = reformContour(1, contour);
                 }
             }
-            return Contours.ToArray();
+            return bestContour.ToArray();
         }
         private IContour reformContour(int beginIndex, IContour contour)
         {
