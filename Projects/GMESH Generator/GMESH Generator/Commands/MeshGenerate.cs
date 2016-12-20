@@ -49,6 +49,7 @@ namespace GMESH_Generator.Commands
                 default:
                     if (storage.Contour[0].getSize() >= 6)
                     {
+                        decomposeContourLine(storage.Contour[0]);
                         Console.WriteLine("Декомпозируем многоугольник...");
                         List<IContour> contours = new List<IContour>();
                         decomposer = new Decompose.Other.HexagonAndHighterDecomposer();
@@ -58,6 +59,7 @@ namespace GMESH_Generator.Commands
                             contours.AddRange(decomposer.decompose(contours.Find(t => t.getSize() == 3)));
                             contours.Remove(contours.Find(t => t.getSize() == 3));
                         }
+                        storage.Contour = contours.ToArray();
                     }
                     break;
             }
