@@ -29,7 +29,8 @@ namespace GMESH_Generator
             {
                 if (buffer.Args == null)
                 {
-                    buffer.Args = Console.ReadLine().Split(' ');
+                    string str = @Console.ReadLine();
+                    buffer.Args = str.Split(' ');
                 }
                 command.callBack();
             } while (!buffer.CloseRunTimeFlag);
