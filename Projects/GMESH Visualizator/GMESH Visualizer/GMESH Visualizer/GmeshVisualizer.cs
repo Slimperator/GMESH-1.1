@@ -11,6 +11,7 @@ using Errors;
 using Analyzer;
 using Parcer;
 using Analitics;
+using System.Drawing.Drawing2D;
 
 namespace GMESH_Visualizer
 {
@@ -22,7 +23,15 @@ namespace GMESH_Visualizer
         Gradient gradient = new Gradient();                              //градиент
         IGrade gradeAnalise = new Analyzer.Grade.ArithmMeanGrade();      //оценка качества
         IError selectError = null;                                       //текущая выбранная ошибка (которая будет подсчевиваться)
-        float zoom = 0;                                                 //для зума
+        float xCoord = 0, yCoord = 0;                                   //актуальные координаты центра окна MESH_Display
+        const float drawWindowCenterXDefault = 474 / 2;                        //Значения центра окна MESH_Display по-умолчанию
+        const float drawWindowCenterYDefault = 354 / 2;
+        float drawWindowCenterXActual = 474 / 2;                         //актуальные координаты центра окна MESH_Display
+        float drawWindowCenterYActual = 354 / 2;
+        Matrix transformMatrix = null;                        //Матрица вида MESH_Display
+        const float scrollValue = (float)0.02;              //Шаг зума
+        bool zoomInFlag = false, zoomOutFlag = false;
+
         public GmeshVisualizer()
         {
             InitializeComponent();
@@ -108,6 +117,9 @@ namespace GMESH_Visualizer
             buffer.clearBuffer();
             MeshInfoDataGridView.DataSource = null;
             MeshInfoDataGridView.Rows.Clear();
+            drawWindowCenterXActual = drawWindowCenterXDefault;
+            drawWindowCenterYActual = drawWindowCenterYDefault;
+            transformMatrix = null;
             Refresh();
         }
 
@@ -133,6 +145,10 @@ namespace GMESH_Visualizer
 
         private void MESHDisplay_Paint(object sender, PaintEventArgs e)
         {
+            if (transformMatrix == null)
+                transformMatrix = e.Graphics.Transform;
+            MESHDisplay_ZoomMatrixTransformation(transformMatrix);
+            e.Graphics.Transform = transformMatrix;
             MESHDisplayDrawContour(sender, e);
             MESHDisplayDrawPoints(sender, e);
             MESHDisplayDrawLine(sender, e);
@@ -220,15 +236,38 @@ namespace GMESH_Visualizer
         }
         private void MESHDisplay_MouseClick(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Left)
             {
-                zoom += 4;
+                xCoord = e.X;
+                yCoord = e.Y;
+                zoomInFlag = true;
             }
             if (e.Button == MouseButtons.Right)
             {
-                zoom -= 4;
+                zoomOutFlag = true;
             }
-            MESHDisplay.Refresh();
+            MESHDisplay.Invalidate();
+        }
+        private void MESHDisplay_ZoomMatrixTransformation(Matrix transformMatrix)
+        {
+            if (zoomInFlag)
+            {
+                //Поправить: 1) Объект е всегда создается заного и дефолтный. нужно либо сохранять шаги, либо сохранять матрицу в отдельной переменной
+                //2) Зумирование должно происходить как 1 + zoom constant
+                //зумируем относительно точки клика
+                transformMatrix.Translate(1-xCoord, 1-yCoord);
+                transformMatrix.Scale(1 + scrollValue, 1 + scrollValue);
+                transformMatrix.Translate(1 + xCoord, 1 + yCoord);
+                //ставим точку клика как центр
+                transformMatrix.Translate(1 - (xCoord - drawWindowCenterXActual), 1 - (yCoord - drawWindowCenterYActual));
+                zoomInFlag = false;
+            }
+            if (zoomOutFlag)
+            {
+                transformMatrix.Scale(1-scrollValue, 1-scrollValue);
+                zoomOutFlag = false;
+            }
         }
     }
 }
