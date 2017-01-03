@@ -149,23 +149,39 @@ namespace GMESH_Visualizer
                 transformMatrix = e.Graphics.Transform;
             MESHDisplay_ZoomMatrixTransformation(transformMatrix);
             e.Graphics.Transform = transformMatrix;
-            MESHDisplayDrawContour(sender, e);
-            MESHDisplayDrawPoints(sender, e);
-            MESHDisplayDrawLine(sender, e);
-            MESHDisplayDrawSelectedErrors(sender, e);
-            //в цикл ниже добавить закраску ячеек
-            //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
             double grad = 0;
             if (buffer.graph != null)
             {
                 foreach (Preprocessing.graph.edge[] eges in buffer.graph)
                 {
-                    if (eges.Length != 4)
-                        continue;
-                    grad += gradeAnalise.calculate(buffer.points[eges[0].a], buffer.points[eges[1].a], buffer.points[eges[2].a], buffer.points[eges[3].a]);
+                    List<System.Drawing.Point> meshToPaint = new List<System.Drawing.Point>();
+                    List<int> index = new List<int>();
+                    Brush br = null;
+                    foreach (Preprocessing.graph.edge edge in eges)
+                    {
+                        index.Add(edge.a);
+                        meshToPaint.Add(new System.Drawing.Point((int)buffer.points[edge.a].x, (int)buffer.points[edge.a].y));
+                    }
+                    if (index.Count != 4)
+                    {
+                        br = new SolidBrush(Gradient.GetCellColor(-1));
+                    }
+                    else
+                    {
+                        double grade = gradeAnalise.calculate(buffer.points[index[0]], buffer.points[index[1]], buffer.points[index[2]], buffer.points[index[3]]);
+                        br = new SolidBrush(Gradient.GetCellColor(grade));
+                        grad += grade;
+                    }
+                    e.Graphics.FillPolygon(br, meshToPaint.ToArray());
                 }
                 buffer.meshGrad = grad / buffer.graph.Length;
                 MeshGradLabel.Text = Convert.ToString(buffer.meshGrad);
+                MESHDisplayDrawContour(sender, e);
+                MESHDisplayDrawPoints(sender, e);
+                MESHDisplayDrawLine(sender, e);
+                MESHDisplayDrawSelectedErrors(sender, e);
+                //в цикл ниже добавить закраску ячеек
+                //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
             }
             MESHDisplay.Show();
         }
