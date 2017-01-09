@@ -64,9 +64,9 @@ namespace GMESH_Generator.Commands
                     break;
             }
             Console.WriteLine("Генерируем сетку...");
+            storage.Contour = Geometry.Contour.Tools.greedyContourDivader(storage.Contour.ToList(), Geometry.Contour.Contour.DefaultLenghtPart).ToArray();
             foreach (IContour x in storage.Contour)       //для всех контуров генерируем сетку
             {
-                decomposeContourLine(x);
                 meshs.Add(generetor.generate(x));
             }
             storage.Meshs = meshs.ToArray();
