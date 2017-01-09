@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contour\Contour.cs" />
+    <Compile Include="Contour\Tools.cs" />
     <Compile Include="Curve\Bezier.cs" />
     <Compile Include="Curve\Line.cs" />
     <Compile Include="Curve\Morph.cs" />
