@@ -31,7 +31,7 @@ namespace GMESH_Generator.Commands
             {
                 if (saveFlag == true)
                 {   //проверяем, верен ли путь. если нет, завершаем чтение команд
-                    string path = arg.Substring(2, arg.Length - 4);
+                    string path = arg; //.Substring(2, arg.Length - 4);
                     if (Directory.Exists(Path.GetDirectoryName(path)))
                     {
                         buffer.PathSave = path;
@@ -39,11 +39,15 @@ namespace GMESH_Generator.Commands
                         continue;
                     }
                     else
+                    {
+                        buffer.Args = null;
+                        saveFlag = false;
                         return;
+                    }
                 }
                 if (openFlag == true)
                 {   //проверяем, верен ли путь. если нет, завершаем чтение команд
-                    string path = arg.Substring(1, arg.Length-2);
+                    string path = arg;//arg.Substring(1, arg.Length-2);
                     if (Directory.Exists(Path.GetDirectoryName(path)) && File.Exists(path))
                     {
                         buffer.PathRead = path;
@@ -51,7 +55,11 @@ namespace GMESH_Generator.Commands
                         continue;
                     }
                     else
+                    {
+                        buffer.Args = null;
+                        openFlag = false;
                         return;
+                    }
                 }
                 switch (argumentSearcher(arg))
                 {
