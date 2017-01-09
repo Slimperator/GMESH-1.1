@@ -17,13 +17,14 @@ namespace Geometry
         double[] cutParams { get; set; } //костыль обыкновенный. править во втором релизе
         IPoint getPoint(double t);
         double lenght { get;}
+        List<ICurve> childCurves { get; set; }
     }
 
     public interface IContour
     {
         double lenghtOfPart { get; set; }
         int getSize();
-        ICurve this[int i] { get; }
+        ICurve this[int i] { get; set; }
     }
 
     public abstract class AbstractMesh
