@@ -23,6 +23,7 @@ namespace Geometry.Contour
         public ICurve this[int i]
         {
             get { return Curves[i]; }
+            set { this.Curves[i] = value; }
         }
 
         public double lenghtOfPart
