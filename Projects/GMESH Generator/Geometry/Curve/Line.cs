@@ -12,6 +12,7 @@ namespace Geometry.Curve
         private IPoint[] CutPoints;
         private double Lenght;
         private double[] CutParams;
+        private List<ICurve> childs = new List<ICurve>(); 
 
         public Line(IPoint l1, IPoint l2)
         {
@@ -55,6 +56,17 @@ namespace Geometry.Curve
             set
             {
                 this.CutPoints = value;
+            }
+        }
+        public List<ICurve> childCurves
+        {
+            get
+            {
+                return this.childs;
+            }
+            set
+            {
+                this.childs = value;
             }
         }
     }

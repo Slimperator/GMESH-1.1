@@ -16,6 +16,7 @@ namespace Geometry.Curve
         private IPoint[] CutPoints;
         private double Lenght;
         private double[] CutParams;
+        private List<ICurve> childs = new List<ICurve>(); 
 
         public Bezier(IPoint P0, IPoint P1, IPoint P2, IPoint P3)
         {
@@ -62,6 +63,17 @@ namespace Geometry.Curve
             set
             {
                 this.CutPoints = value;
+            }
+        }
+        public List<ICurve> childCurves
+        {
+            get
+            {
+                return this.childs;
+            }
+            set
+            {
+                this.childs = value;
             }
         }
     }
