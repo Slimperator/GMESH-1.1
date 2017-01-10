@@ -18,8 +18,8 @@ namespace Geometry.Contour
             {
                 for (int i = 0; i < contours[j].getSize(); i++)
                 {
-                    contours[j][i].cutParams = null;
                     contours[j][i].cutPoints = null;
+                    contours[j][i].cutParams = null;
                     if (beginCurve == null || beginCurve.lenght >= contours[j][i].lenght)
                     {
                         beginCurve = contours[j][i];
@@ -80,7 +80,7 @@ namespace Geometry.Contour
                 return;
             }
             //иначе ищем кривую, которая уже разрезана, и режем противоположную на тоже количество точек
-            if (curve1.cutPoints != null && curve1.cutPoints.Length != 0)
+            if (curve1.cutPoints != null && curve1.cutPoints.Length > 1)
             {
                 Curve.Tools.slittingCurve(curve1.cutPoints.Length, curve2);
             }
