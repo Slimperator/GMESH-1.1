@@ -11,9 +11,9 @@ namespace Geometry.Curve
         public IPoint begin { get; private set; }
         public IPoint end { get; private set; }
         private double paramBegin, paramEnd, max, min;
-        private IPoint[] CutPoints;
+        private IPoint[] CutPoints = null;
         private double Lenght;
-        private double[] CutParams;
+        private double[] CutParams = null;
         private int countPointsParentCurve;
         private List<ICurve> childs = new List<ICurve>();
         private bool reversFlag = false;
@@ -25,6 +25,7 @@ namespace Geometry.Curve
             this.paramEnd = paramTEnd;
             begin = this.mainCurve.getPoint(paramBegin);
             end = this.mainCurve.getPoint(paramEnd);
+            mainCurve.childCurves.Add(this);
             Initialize();
         }
         public SubCurve(ICurve mainCurve, IPoint Begin, IPoint End)
@@ -34,6 +35,7 @@ namespace Geometry.Curve
             this.paramEnd = mainCurve.cutParams[mainCurve.cutPoints.ToList().FindIndex(x => x.x == End.x && x.y == End.y)];
             begin = Begin;
             end = End;
+            mainCurve.childCurves.Add(this);
             Initialize();
         }
         ~SubCurve()
@@ -67,7 +69,6 @@ namespace Geometry.Curve
                     ps.Add(mainCurve.cutPoints[i]);
                 }
             }
-            mainCurve.childCurves.Add(this);
             CutParams = pt.ToArray();
             CutPoints = ps.ToArray();
             this.Lenght = Math.Round(Tools.length(this), 4);
@@ -91,8 +92,8 @@ namespace Geometry.Curve
         {
             get
             {
-                if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
-                    Initialize();
+                //if (notifyParent())//если кривая родитель поменялась, тогда обновляем данные
+                    //Initialize();
                 return this.CutParams;
             }
             set
@@ -121,7 +122,7 @@ namespace Geometry.Curve
         private bool notifyParent()
         {
             bool changeFlag = false;
-            if (mainCurve.cutPoints.Length != countPointsParentCurve)
+            if ((mainCurve.cutPoints == null & this.countPointsParentCurve!=0) || mainCurve.cutPoints.Length != countPointsParentCurve)
                 return true;
             foreach (IPoint p in this.CutPoints)
             {
@@ -149,6 +150,8 @@ namespace Geometry.Curve
             if ((mainCurve.cutParams == null || mainCurve.cutParams.Length == 0) && ((newParams != null) && (newParams.Length != 0)))
             {
                 oldMainParams = newParams.ToList();
+                for (int i = 0; i < oldMainParams.Count; i++)
+                    oldMainParams[i] = oldMainParams[i] * (max - min) + min;
             }
             else
             {
