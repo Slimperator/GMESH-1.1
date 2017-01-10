@@ -112,7 +112,6 @@ namespace GMESH_Visualizer
         {
             MESHDisplay.Image = null;
             MESHDisplay.Invalidate();
-            textBox1.Text = null;
             MeshGradLabel.Text = null;
             buffer.clearBuffer();
             MeshInfoDataGridView.DataSource = null;
@@ -284,6 +283,11 @@ namespace GMESH_Visualizer
                 transformMatrix.Scale(1-scrollValue, 1-scrollValue);
                 zoomOutFlag = false;
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
