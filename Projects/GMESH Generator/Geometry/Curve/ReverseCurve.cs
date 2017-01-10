@@ -8,8 +8,8 @@ namespace Geometry.Curve
     public class ReverseCurve : ICurve
     {
         private ICurve curve;
-        private IPoint[] CutPoints;
-        private double[] CutParams;
+        private IPoint[] CutPoints = null;
+        private double[] CutParams = null;
         private double Lenght;
         private bool synchronizeFlag = false;
         private List<ICurve> childs = new List<ICurve>();

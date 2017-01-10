@@ -9,9 +9,9 @@ namespace Geometry.Curve
     {
         public IPoint l1 { get; private set; }
         public IPoint l2 { get; private set; }
-        private IPoint[] CutPoints;
+        private IPoint[] CutPoints = null;
         private double Lenght;
-        private double[] CutParams;
+        private double[] CutParams = null;
         private List<ICurve> childs = new List<ICurve>(); 
 
         public Line(IPoint l1, IPoint l2)
