@@ -9,9 +9,10 @@ namespace Geometry.Curve
     {
         private IPoint newA, newB;
         private ICurve curve;
-        private IPoint[] cutPoints;
+        private IPoint[] cutPoints = null;
         private double Lenght;
-        private double[] CutParams;
+        private double[] CutParams = null;
+        private List<ICurve> childs = new List<ICurve>(); 
 
         public Relocate(ICurve curve, IPoint newA, IPoint newB)
         {
@@ -56,6 +57,17 @@ namespace Geometry.Curve
         {
             get { return this.cutPoints; }
             set { this.cutPoints = value; }
+        }
+        public List<ICurve> childCurves
+        {
+            get
+            {
+                return this.childs;
+            }
+            set
+            {
+                this.childs = value;
+            }
         }
     }
 }

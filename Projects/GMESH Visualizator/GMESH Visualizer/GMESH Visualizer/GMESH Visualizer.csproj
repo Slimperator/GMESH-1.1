@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Analyzer">
-      <HintPath>..\..\..\GMESH Generator\Analyzer\bin\Debug\Analyzer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +80,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\GMESH Generator\Analyzer\Analyzer.csproj">
+      <Project>{94B15790-A459-4317-B4F4-75DC5D639FE4}</Project>
+      <Name>Analyzer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\GMESH Generator\Geometry\Geometry.csproj">
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>

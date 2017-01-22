@@ -10,9 +10,10 @@ namespace Geometry.Curve
         private ICurve a;
         private ICurve b;
         private double alpha;
-        private IPoint[] CutPoints;
+        private IPoint[] CutPoints = null;
         private double Lenght;
-        private double[] CutParams;
+        private double[] CutParams = null;
+        private List<ICurve> childs = new List<ICurve>(); 
         public Morph(ICurve a, ICurve b, double alpha)
         {
             this.a = a;
@@ -58,6 +59,17 @@ namespace Geometry.Curve
             set 
             { 
                 this.CutPoints = value; 
+            }
+        }
+        public List<ICurve> childCurves
+        {
+            get
+            {
+                return this.childs;
+            }
+            set
+            {
+                this.childs = value;
             }
         }
     }

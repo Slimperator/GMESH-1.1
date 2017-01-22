@@ -12,11 +12,12 @@ namespace Analitics
     {
         public readonly int rate;
         public OBjMeshAnalitic() {}
+        List<IError> errors = new List<IError>();
 
-        public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints)
+        public List<IError> doAnalitics(Preprocessing.graph.edge[][] graph, List<IPoint> myLittlePoints, List<ICurve> curvesNeeded)
         {
             List<int> pows = new List<int>();
-            List<IError> errors = new List<IError>();
+            
             Dictionary<int, int> pointsRate = new Dictionary<int, int>();
             foreach (Preprocessing.graph.edge[] array in graph)
             {
@@ -31,34 +32,43 @@ namespace Analitics
                 }
                 foreach (Preprocessing.graph.edge elem in array)
                 {
-                    try
-                    {
-                        var r = pointsRate.First(t => t.Key == elem.a);
-                        pointsRate[r.Key] = r.Value + 1;
-                    }
-                    catch
-                    {
+                    if(pointsRate.ContainsKey(elem.a))
+                        pointsRate[elem.a] = pointsRate[elem.a] + 1;
+                    else
                         pointsRate.Add(elem.a, 1);
-                    }
-                    try
-                    {
-                        var r = pointsRate.First(t => t.Key == elem.b);
-                        pointsRate[r.Key] = r.Value + 1;
-                    }
-                    catch
-                    {
+                    if(pointsRate.ContainsKey(elem.b))
+                        pointsRate[elem.b] = pointsRate[elem.b] + 1;
+                    else
                         pointsRate.Add(elem.b, 1);
-                    }
                 }
             }
 
-
             foreach (KeyValuePair<int, int> point in pointsRate)
             {
-                if (point.Value > 4 || point.Value < 2)
+                if (!(point.Value == 4 || point.Value == 2 || point.Value == 8))
                     errors.Add(new ErrorPoint(1, "wrong point rate", myLittlePoints[point.Key]));
             }
+            
+            foreach (ICurve i in curvesNeeded)
+            {
+                foreach (ICurve j in curvesNeeded)
+                {
+                    if (j == i) continue;
+                    if (Tools.lineIntersectionCheck(i.getPoint(0.0), i.getPoint(1.0), j.getPoint(0.0), j.getPoint(1.0)) == true)
+                    {
+                        addErrorLineInErrorList(new ErrorCurve(1, "there is INTERSECTION!", i));
+                        addErrorLineInErrorList(new ErrorCurve(2, "there is INTERSECTION!", j));
+                    }
+                }
+            }
             return errors;
+        }
+        private void addErrorLineInErrorList(IError error)
+        {
+            if (!errors.Exists(t => t == error))
+            {
+                errors.Add(error);
+            }
         }
 
     }

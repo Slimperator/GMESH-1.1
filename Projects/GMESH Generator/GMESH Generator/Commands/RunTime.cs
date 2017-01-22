@@ -31,25 +31,35 @@ namespace GMESH_Generator.Commands
             {
                 if (saveFlag == true)
                 {   //проверяем, верен ли путь. если нет, завершаем чтение команд
-                    if (Directory.Exists(Path.GetDirectoryName(arg)))
+                    string path = arg; //.Substring(2, arg.Length - 4);
+                    if (Directory.Exists(Path.GetDirectoryName(path)))
                     {
-                        buffer.PathSave = arg;
+                        buffer.PathSave = path;
                         saveFlag = false;
                         continue;
                     }
                     else
+                    {
+                        buffer.Args = null;
+                        saveFlag = false;
                         return;
+                    }
                 }
                 if (openFlag == true)
                 {   //проверяем, верен ли путь. если нет, завершаем чтение команд
-                    if (Directory.Exists(Path.GetDirectoryName(arg)) && File.Exists(arg))
+                    string path = arg;//arg.Substring(1, arg.Length-2);
+                    if (Directory.Exists(Path.GetDirectoryName(path)) && File.Exists(path))
                     {
-                        buffer.PathRead = arg;
+                        buffer.PathRead = path;
                         openFlag = false;
                         continue;
                     }
                     else
+                    {
+                        buffer.Args = null;
+                        openFlag = false;
                         return;
+                    }
                 }
                 switch (argumentSearcher(arg))
                 {

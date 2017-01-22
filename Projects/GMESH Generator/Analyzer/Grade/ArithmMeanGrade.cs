@@ -53,7 +53,7 @@ namespace Analyzer.Grade
             List<double> a = new List<double>();
             foreach (Line curve in curves)
             {
-                double l = Tools.length(curve);
+                double l = curve.lenght;
                 double round = 1000000000;
                 l = (long)(l * round) / round;
                 a.Add(l);

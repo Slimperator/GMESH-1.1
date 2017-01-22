@@ -11,6 +11,7 @@ using Errors;
 using Analyzer;
 using Parcer;
 using Analitics;
+using System.Drawing.Drawing2D;
 
 namespace GMESH_Visualizer
 {
@@ -18,15 +19,22 @@ namespace GMESH_Visualizer
     {
         Buffer buffer = Buffer.getInstance();                            //буффер
         Analitics.OBjMeshAnalitic analitica = new OBjMeshAnalitic();     //проверка на ошибки
-        IReader reader; //= new ObjReader();                             //читалка
+        IReader reader = new ObjReader();                             //читалка
         Gradient gradient = new Gradient();                              //градиент
         IGrade gradeAnalise = new Analyzer.Grade.ArithmMeanGrade();      //оценка качества
         IError selectError = null;                                       //текущая выбранная ошибка (которая будет подсчевиваться)
-        
+        float xCoord = 0, yCoord = 0;                                   //актуальные координаты центра окна MESH_Display
+        const float drawWindowCenterXDefault = 474 / 2;                        //Значения центра окна MESH_Display по-умолчанию
+        const float drawWindowCenterYDefault = 354 / 2;
+        float drawWindowCenterXActual = 474 / 2;                         //актуальные координаты центра окна MESH_Display
+        float drawWindowCenterYActual = 354 / 2;
+        Matrix transformMatrix = null;                        //Матрица вида MESH_Display
+        const float scrollValue = (float)0.02;              //Шаг зума
+        bool zoomInFlag = false, zoomOutFlag = false;
+
         public GmeshVisualizer()
         {
             InitializeComponent();
-            updateMeshInfoDataGridSetView();
         }
 
         private void contourToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -58,13 +66,20 @@ namespace GMESH_Visualizer
                     buffer.graph = graph;
                     buffer.lines = lines;
                     buffer.points = points;
-                    tryAnaliseMesh();
+                    meshHandler();
                 }
                 catch 
                 {
                     return;  //добавить еррор окно.
                 }
             }
+        }
+
+        private void meshHandler()
+        {
+            tryAnaliseMesh();
+            updateMeshInfoDataGridSetView();
+            this.MESHDisplay.Refresh();
         }
 
         private void contourToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,81 +110,135 @@ namespace GMESH_Visualizer
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            MESHDisplay.Image = null;
+            MESHDisplay.Invalidate();
+            MeshGradLabel.Text = null;
+            buffer.clearBuffer();
+            MeshInfoDataGridView.DataSource = null;
+            MeshInfoDataGridView.Rows.Clear();
+            drawWindowCenterXActual = drawWindowCenterXDefault;
+            drawWindowCenterYActual = drawWindowCenterYDefault;
+            transformMatrix = null;
+            Refresh();
         }
 
         private void tryAnaliseMesh()
         {
-            buffer.errors = analitica.doAnalitics(buffer.graph, buffer.points);
+            buffer.errors = analitica.doAnalitics(buffer.graph, buffer.points, buffer.lines);
         }
 
         private void updateMeshInfoDataGridSetView()
         {
-            this.MeshInfoDataGridView.Rows.Add(buffer.errors.Count);
-            foreach(IError error in buffer.errors)
+            if (buffer.errors == null || buffer.errors.Count == 0)
+                this.MeshInfoDataGridView.Rows.Clear();
+            else
             {
-                this.MeshInfoDataGridView.Rows[buffer.errors.IndexOf(error)].Cells[0].Value = Properties.Resources.Error;
-                this.MeshInfoDataGridView.Rows[buffer.errors.IndexOf(error)].Cells[1].Value = error.getInfo();
+                this.MeshInfoDataGridView.Rows.Add(buffer.errors.Count);
+                foreach (IError error in buffer.errors)
+                {
+                    this.MeshInfoDataGridView.Rows[buffer.errors.IndexOf(error)].Cells[0].Value = Properties.Resources.Error;
+                    this.MeshInfoDataGridView.Rows[buffer.errors.IndexOf(error)].Cells[1].Value = error.getInfo();
+                }
             }
         }
 
         private void MESHDisplay_Paint(object sender, PaintEventArgs e)
         {
+            if (transformMatrix == null)
+                transformMatrix = e.Graphics.Transform;
+            MESHDisplay_ZoomMatrixTransformation(transformMatrix);
+            e.Graphics.Transform = transformMatrix;
+            double grad = 0;
+            if (buffer.graph != null)
+            {
+                foreach (Preprocessing.graph.edge[] eges in buffer.graph)
+                {
+                    List<System.Drawing.Point> meshToPaint = new List<System.Drawing.Point>();
+                    List<int> index = new List<int>();
+                    Brush br = null;
+                    foreach (Preprocessing.graph.edge edge in eges)
+                    {
+                        index.Add(edge.a);
+                        meshToPaint.Add(new System.Drawing.Point((int)buffer.points[edge.a].x, (int)buffer.points[edge.a].y));
+                    }
+                    if (index.Count != 4)
+                    {
+                        br = new SolidBrush(Gradient.GetCellColor(-1));
+                    }
+                    else
+                    {
+                        double grade = gradeAnalise.calculate(buffer.points[index[0]], buffer.points[index[1]], buffer.points[index[2]], buffer.points[index[3]]);
+                        br = new SolidBrush(Gradient.GetCellColor(grade));
+                        grad += grade;
+                    }
+                    e.Graphics.FillPolygon(br, meshToPaint.ToArray());
+                }
+                buffer.meshGrad = grad / buffer.graph.Length;
+                MeshGradLabel.Text = Convert.ToString(buffer.meshGrad);
+                MESHDisplayDrawContour(sender, e);
+                MESHDisplayDrawPoints(sender, e);
+                MESHDisplayDrawLine(sender, e);
+                MESHDisplayDrawSelectedErrors(sender, e);
+                //в цикл ниже добавить закраску ячеек
+                //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
+            }
+            MESHDisplay.Show();
+        }
+        private void MESHDisplayDrawPoints(object sender, PaintEventArgs e)
+        {
             //рисуем точки
-            foreach (IPoint point in buffer.points)
-            {
-                //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
-                if (buffer.errors.Exists(t => t.getErrorObjectHesh() == point.GetHashCode()))
-                    e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
-                else
-                e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
-            }
+            if(buffer.points != null)
+                foreach (IPoint point in buffer.points)
+                {
+                    //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
+                    if (buffer.errors.Exists(t => t.getErrorObjectHesh() == point.GetHashCode()))
+                        e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+                    else
+                        e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+                }
+        }
+        private void MESHDisplayDrawLine(object sender, PaintEventArgs e)
+        {
             //рисуем линии
-            foreach (ICurve curve in buffer.lines)
-            {
-                //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
-                if (buffer.errors.Exists(t => t.getErrorObjectHesh() == curve.GetHashCode()))
-                    e.Graphics.DrawLine(Pens.Red, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
-    Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
-                else
-                e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
-                    Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
-            }
+            if(buffer.lines != null)
+                foreach (ICurve curve in buffer.lines)
+                {
+                    //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
+                    if (buffer.errors.Exists(t => t.getErrorObjectHesh() == curve.GetHashCode()))
+                        e.Graphics.DrawLine(Pens.Red, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
+        Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
+                    else
+                        e.Graphics.DrawLine(Pens.Black, Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
+                            Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
+                }
+        }
+        private void MESHDisplayDrawContour(object sender, PaintEventArgs e)
+        {
             //рисуем контур, если он есть
             if (buffer.contour != null)
             {
-                for(int i = 0; i<buffer.contour.getSize(); i++)
+                for (int i = 0; i < buffer.contour.getSize(); i++)
                     e.Graphics.DrawLine(Pens.Blue, Convert.ToSingle(buffer.contour[i].getPoint(0).x), Convert.ToSingle(buffer.contour[i].getPoint(0).y),
                     Convert.ToSingle(buffer.contour[i].getPoint(1).x), Convert.ToSingle(buffer.contour[i].getPoint(1).y));
             }
+        }
+        private void MESHDisplayDrawSelectedErrors(object sender, PaintEventArgs e)
+        {
             //выделяем элемент, если есть выделенный
             if (selectError != null)
             {
-                if(selectError.getErrorObjectType() == "curve")
+                if (selectError.getErrorObjectType() == "curve")
                     foreach (ICurve curve in buffer.lines)
                         if (selectError.getErrorObjectHesh() == curve.GetHashCode())
-                            e.Graphics.DrawLine(new Pen(Color.Red,3), Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
+                            e.Graphics.DrawLine(new Pen(Color.Red, 3), Convert.ToSingle(curve.getPoint(0).x), Convert.ToSingle(curve.getPoint(0).y),
             Convert.ToSingle(curve.getPoint(1).x), Convert.ToSingle(curve.getPoint(1).y));
 
-                if(selectError.getErrorObjectType() == "point")
+                if (selectError.getErrorObjectType() == "point")
                     foreach (IPoint point in buffer.points)
                         if (selectError.getErrorObjectHesh() == point.GetHashCode())
                             e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 10, 10);
             }
-            //в цикл ниже добавить закраску ячеек
-            //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
-            double grad = 0;
-            foreach (Preprocessing.graph.edge[] eges in buffer.graph)
-            {
-                if (eges.Length != 4)
-                    continue;
-                grad += gradeAnalise.calculate(buffer.points[eges[0].a], buffer.points[eges[1].a], buffer.points[eges[2].a], buffer.points[eges[3].a]);
-            }
-            buffer.meshGrad = grad / buffer.graph.Length;
-
-            MESHDisplay.Refresh();
         }
-
         private void MeshInfoDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             //если в буфере ошибок ошибок нет, или их меньше ячеек, а запись ячейки есть, то ошибка
@@ -179,6 +248,46 @@ namespace GMESH_Visualizer
             selectError = buffer.errors[e.RowIndex];
             //обновляем дисплей
             MESHDisplay.Invalidate();
+        }
+        private void MESHDisplay_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Left)
+            {
+                xCoord = e.X;
+                yCoord = e.Y;
+                zoomInFlag = true;
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                zoomOutFlag = true;
+            }
+            MESHDisplay.Invalidate();
+        }
+        private void MESHDisplay_ZoomMatrixTransformation(Matrix transformMatrix)
+        {
+            if (zoomInFlag)
+            {
+                //Поправить: 1) Объект е всегда создается заного и дефолтный. нужно либо сохранять шаги, либо сохранять матрицу в отдельной переменной
+                //2) Зумирование должно происходить как 1 + zoom constant
+                //зумируем относительно точки клика
+                transformMatrix.Translate(1-xCoord, 1-yCoord);
+                transformMatrix.Scale(1 + scrollValue, 1 + scrollValue);
+                transformMatrix.Translate(1 + xCoord, 1 + yCoord);
+                //ставим точку клика как центр
+                transformMatrix.Translate(1 - (xCoord - drawWindowCenterXActual), 1 - (yCoord - drawWindowCenterYActual));
+                zoomInFlag = false;
+            }
+            if (zoomOutFlag)
+            {
+                transformMatrix.Scale(1-scrollValue, 1-scrollValue);
+                zoomOutFlag = false;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -9,13 +9,13 @@ using System.IO;
 
 namespace Parcer
 {
-    public class ObjReader : IReader
+    class OBJReaderCont
     {
-        public void read(string path, out List<IPoint> listPoint, out List<ICurve> listCurve, out Preprocessing.graph.edge[][] meshCells)
+        public IContour read(string path)
         {
 
-            listPoint = new List<IPoint>();//сюдабудем писать вершинки
-            listCurve = new List<ICurve>();//сюда отрезки
+           List<IPoint> listPoint = new List<IPoint>();//сюдабудем писать вершинки
+            List<ICurve> listCurve = new List<ICurve>();//сюда отрезки
             List<int> someInts = new List<int>();//индексы точек(от 0)
             StreamReader objReader = new StreamReader(path);
             string[] objPoints;//для парсинга строки
@@ -47,10 +47,12 @@ namespace Parcer
                 }
                 
             }
-            graph Gr = Preprocessing.graph.construct(someInts.ToArray());
-            meshCells = Preprocessing.alg.cycles(Gr);
             
+           return  new Geometry.Contour.Contour(listCurve.ToArray());
+          
         }
 
     }
-}
+    }
+
+

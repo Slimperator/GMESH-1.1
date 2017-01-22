@@ -45,10 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GMESH Visualizator\GMESH Visualizer\Parcer\Parcer.csproj">
-      <Project>{2D889952-1901-41AE-9B75-77E892322C16}</Project>
-      <Name>Parcer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Geometry\Geometry.csproj">
       <Project>{C6DEAC97-B708-4C50-B342-710DCA738A51}</Project>
       <Name>Geometry</Name>
