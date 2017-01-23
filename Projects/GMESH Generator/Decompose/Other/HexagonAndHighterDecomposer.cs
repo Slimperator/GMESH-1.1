@@ -8,7 +8,7 @@ using Generator;
 
 namespace Decompose.Other
 {
-    public class HexagonAndHighterDecomposer: IDecompose
+    public class HexagonAndHighterDecomposer : IDecompose
     {
         private List<IContour> bestContour = new List<IContour>();
         private double bestGrad;
@@ -17,9 +17,9 @@ namespace Decompose.Other
 
         public Geometry.IContour[] decompose(Geometry.IContour contour)
         {
-            //проверяем, нужно ли количество углов
+            //проверяем, нужное ли количество углов
             size = contour.getSize();
-            if (size < 6)
+            if (size < 5)
                 return null;
             //формируем контура 
             for (int i = 0; i < size; i++)
@@ -50,18 +50,18 @@ namespace Decompose.Other
         {
             List<IContour> contours = new List<IContour>();
             //проводим линию между min+1 & max-1 точками контура
-            ICurve newCurve = new Geometry.Curve.Line(contour[1].cutPoints[0], 
-                contour[contour.getSize()-2].cutPoints[0]);
+            ICurve newCurve = new Geometry.Curve.Line(contour[1].cutPoints[0],
+                contour[contour.getSize() - 2].cutPoints[0]);
             //режем линию на кусочки
             Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart, newCurve);
             //формируем первый новый контур
             contours.Add(new Geometry.Contour.Contour
-                (new ICurve[4] { contour[0], newCurve, contour[contour.getSize() - 2], contour[contour.getSize() - 1]}));
+                (new ICurve[4] { contour[0], newCurve, contour[contour.getSize() - 2], contour[contour.getSize() - 1] }));
             //создаем линию с другим направлением, на основе новопроведенной
             ICurve newReversCurve = new Geometry.Curve.ReverseCurve(newCurve);
             //формируем оставшийся контур, без убранных линий
             List<ICurve> curvesForContourTwo = new List<ICurve>();
-            for(int i = 1; i < contour.getSize() - 2; i++)
+            for (int i = 1; i < contour.getSize() - 2; i++)
                 curvesForContourTwo.Add(contour[i]);
             curvesForContourTwo.Add(newReversCurve);
             //если оставшаяся часть контура больше чем 4 угольник, то рекурсивно сново разбиваем контур, пока не докопаемся до истины
@@ -77,8 +77,11 @@ namespace Decompose.Other
         {   //рассчитываем качество для всех контуров
             double grad = 0;
             foreach (IContour contour in contours)
-                grad += gradeTool.calculate(contour[0].getPoint(0), contour[1].getPoint(0), 
-                    contour[2].getPoint(0), contour[3].getPoint(0));
+            {
+                if (contour.getSize() != 3)
+                    grad += gradeTool.calculate(contour[0].getPoint(0), contour[1].getPoint(0),
+                        contour[2].getPoint(0), contour[3].getPoint(0));
+            }
             return grad;
         }
     }
