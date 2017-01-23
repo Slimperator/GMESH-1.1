@@ -11,9 +11,9 @@ namespace Geometry.Curve
         public IPoint begin { get; private set; }
         public IPoint end { get; private set; }
         private double paramBegin, paramEnd, max, min;
-        private IPoint[] CutPoints = null;
+        private IPoint[] CutPoints = new IPoint[0];
         private double Lenght;
-        private double[] CutParams = null;
+        private double[] CutParams = new double[0];
         private int countPointsParentCurve;
         private List<ICurve> childs = new List<ICurve>();
         private bool reversFlag = false;

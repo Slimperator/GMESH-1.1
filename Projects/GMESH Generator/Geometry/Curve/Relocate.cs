@@ -9,9 +9,9 @@ namespace Geometry.Curve
     {
         private IPoint newA, newB;
         private ICurve curve;
-        private IPoint[] cutPoints = null;
+        private IPoint[] cutPoints = new IPoint[0];
         private double Lenght;
-        private double[] CutParams = null;
+        private double[] CutParams = new double[0];
         private List<ICurve> childs = new List<ICurve>(); 
 
         public Relocate(ICurve curve, IPoint newA, IPoint newB)

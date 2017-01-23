@@ -13,9 +13,9 @@ namespace Geometry.Curve
         public IPoint P1 { get; private set; }
         public IPoint P2 { get; private set; }
         public IPoint P3 { get; private set; }
-        private IPoint[] CutPoints = null;
+        private IPoint[] CutPoints = new IPoint[0];
         private double Lenght;
-        private double[] CutParams = null;
+        private double[] CutParams = new double[0];
         private List<ICurve> childs = new List<ICurve>(); 
 
         public Bezier(IPoint P0, IPoint P1, IPoint P2, IPoint P3)

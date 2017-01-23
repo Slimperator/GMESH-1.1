@@ -10,9 +10,9 @@ namespace Geometry.Curve
         private ICurve a;
         private ICurve b;
         private double alpha;
-        private IPoint[] CutPoints = null;
+        private IPoint[] CutPoints = new IPoint[0];
         private double Lenght;
-        private double[] CutParams = null;
+        private double[] CutParams = new double[0];
         private List<ICurve> childs = new List<ICurve>(); 
         public Morph(ICurve a, ICurve b, double alpha)
         {
