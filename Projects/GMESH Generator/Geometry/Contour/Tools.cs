@@ -18,8 +18,8 @@ namespace Geometry.Contour
             {
                 for (int i = 0; i < contours[j].getSize(); i++)
                 {
-                    contours[j][i].cutPoints = null;
-                    contours[j][i].cutParams = null;
+                    contours[j][i].cutPoints = new IPoint[0];
+                    contours[j][i].cutParams = new double[0];
                     if (beginCurve == null || beginCurve.lenght >= contours[j][i].lenght)
                     {
                         beginCurve = contours[j][i];
@@ -65,7 +65,7 @@ namespace Geometry.Contour
         private static void cutBoard(ref ICurve curve1, ref ICurve curve2, double partSize)
         {
             //если обе кривые не разрезаны, ищем меньшую, режем её, потом режем противоположную на тоже количество точек
-            if ((curve1.cutPoints == null || curve1.cutPoints.Length == 0) & (curve2.cutPoints == null||curve2.cutPoints.Length == 0))
+            if ((curve1.cutPoints == null || curve1.cutPoints.Length == 0 || curve1.cutPoints.Length == 1) & (curve2.cutPoints == null || curve2.cutPoints.Length == 0 || curve2.cutPoints.Length == 1))
             {
                 if (curve1.lenght < curve2.lenght)
                 {
@@ -80,7 +80,7 @@ namespace Geometry.Contour
                 return;
             }
             //иначе ищем кривую, которая уже разрезана, и режем противоположную на тоже количество точек
-            if (curve1.cutPoints != null && curve1.cutPoints.Length > 1)
+            if (curve1.cutPoints != null & curve1.cutPoints.Length > 1)
             {
                 Curve.Tools.slittingCurve(curve1.cutPoints.Length, curve2);
             }
