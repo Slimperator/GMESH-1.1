@@ -6,12 +6,14 @@ using System.Text;
 namespace Geometry.Contour
 {
     public class Tools
-    {   //ВНИМАНИЕ!!! Для фигур больше 5-угольника использовать ТОЛЬКО с универсальным алгоритмом декомпозиции. С остальными будет лажа
+    {
+        //ВНИМАНИЕ!!! Для фигур больше 5-угольника использовать ТОЛЬКО с универсальным алгоритмом декомпозиции. С остальными будет лажа
         public static List<IContour> greedyContourDivader(List<IContour> contours, double partSize)
         {
             List<IContour> result = new List<IContour>();
             IContour currentContour = null;
             ICurve beginCurve = null;
+            bool costil = false;
             int index = 0;
             //ищем самую маленькую кривую. с неё начинаем разрезку.
             for (int j =0; j < contours.Count; j++)
@@ -48,6 +50,16 @@ namespace Geometry.Contour
                 result.Add(newContour);
                 contours.RemoveAt(index);
             }
+            foreach(IContour c in result)
+            {
+                for (int i = 0; i < c.getSize(); i++)
+                {
+                    if(c[i].childCurves.Count>0)
+                        costil = true;
+                }
+            }
+            if (costil == true)
+                Curve.Tools.slittingCurve(result[result.Count - 2][1].cutPoints.Length, result[result.Count - 2][3]);
             return result;
         }
         private static void cutContour(ref IContour contour, double partSize)
@@ -102,7 +114,7 @@ namespace Geometry.Contour
                             return contours.IndexOf(contour);
                         else 
                         { //или все потомки уже разрезаны
-                            if (!contour[i].childCurves.Exists(t => t.cutPoints == null))
+                            if (!contour[i].childCurves.Exists(t => t.cutPoints.Length == 0))
                             {
                                 return contours.IndexOf(contour);
                             }
