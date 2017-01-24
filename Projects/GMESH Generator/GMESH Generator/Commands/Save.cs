@@ -24,12 +24,12 @@ namespace GMESH_Generator.Commands
             if (storage.AnaliseMesh == true)
             {
                 string path = Path.GetDirectoryName(storage.PathRead) + @"\" + Path.GetFileNameWithoutExtension(storage.PathRead) + "GradAnalize.txt";
-                File.Create(path);
-                using (System.IO.StreamWriter file =
+                File.WriteAllText(path, Convert.ToString(storage.MeshsEstimate));
+                /*using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(path, true))
                 {
                     file.WriteLine(Convert.ToSingle(storage.MeshsEstimate));
-                }
+                }*/
                 storage.AnaliseMesh = false;
             }
         }

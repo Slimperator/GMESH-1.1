@@ -104,14 +104,14 @@ namespace GMESH_Generator.Commands
             command.callBack();
             command = new Commands.MeshGenerate();
             command.callBack();
+            //если путь для сейва не указан, берем родительский каталог и сохраняем сетку под тем же именем
+            if (buffer.PathSave == null || buffer.PathSave == "")
+                buffer.PathSave = Path.GetDirectoryName(buffer.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buffer.PathRead) + "MESH.obj";
             if (buffer.AnaliseMesh == true)
             {
                 command = new Commands.GradAnalize();
                 command.callBack();
             }
-            //если путь для сейва не указан, берем родительский каталог и сохраняем сетку под тем же именем
-            if (buffer.PathSave == null || buffer.PathSave == "")
-                buffer.PathSave = Path.GetDirectoryName(buffer.PathRead) + @"\" + Path.GetFileNameWithoutExtension(buffer.PathRead) + "MESH.obj";
             command = new Commands.Save();
             command.callBack();
             buffer.clearBuffer();
