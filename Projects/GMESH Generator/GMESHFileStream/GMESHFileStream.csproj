@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Core.cs" />
     <Compile Include="OBJFile\OBJCreator.cs" />
+    <Compile Include="OBJFile\OBJReaderCont.cs" />
     <Compile Include="Parser\XMLPreprocessing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLFile\Curve.cs" />
