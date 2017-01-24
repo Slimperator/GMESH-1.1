@@ -107,11 +107,11 @@ namespace Geometry.Curve
         {
             get
             {
-                return this.childs;
+                return curve.childCurves;
             }
             set
             {
-                this.childs = value;
+                curve.childCurves = value;
             }
         }
     }
