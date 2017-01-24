@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "..\..\GMESH Gen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analitics", "Analitics\Analitics.csproj", "{9ADACE07-9290-4636-B6C2-88C585B94D02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMESHFileStream", "..\..\GMESH Generator\GMESHFileStream\GMESHFileStream.csproj", "{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GMESH Visualizer.vsmdi
@@ -105,6 +107,16 @@ Global
 		{9ADACE07-9290-4636-B6C2-88C585B94D02}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9ADACE07-9290-4636-B6C2-88C585B94D02}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9ADACE07-9290-4636-B6C2-88C585B94D02}.Release|x86.ActiveCfg = Release|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D2744AEC-DCBC-4E1B-BF6A-4233DAF3F098}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

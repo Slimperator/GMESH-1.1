@@ -19,7 +19,7 @@ namespace GMESH_Visualizer
     {
         Buffer buffer = Buffer.getInstance();                            //буффер
         Analitics.OBjMeshAnalitic analitica = new OBjMeshAnalitic();     //проверка на ошибки
-        IReader reader = new ObjReader();                             //читалка
+        Parcer.IReader reader = new ObjReader();                             //читалка
         Gradient gradient = new Gradient();                              //градиент
         IGrade gradeAnalise = new Analyzer.Grade.ArithmMeanGrade();      //оценка качества
         IError selectError = null;                                       //текущая выбранная ошибка (которая будет подсчевиваться)
@@ -29,7 +29,7 @@ namespace GMESH_Visualizer
         float drawWindowCenterXActual = 474 / 2;                         //актуальные координаты центра окна MESH_Display
         float drawWindowCenterYActual = 354 / 2;
         Matrix transformMatrix = null;                        //Матрица вида MESH_Display
-        const float scrollValue = (float)0.02;              //Шаг зума
+        const float scrollValue = (float)0.08;              //Шаг зума
         bool zoomInFlag = false, zoomOutFlag = false;
 
         public GmeshVisualizer()
@@ -40,12 +40,28 @@ namespace GMESH_Visualizer
         private void contourToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "All files|*.*";
+            openFileDialog1.Filter = "XML|*.xml|OBJ|*.obj";
             openFileDialog1.Title = "Open Contour File";
 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // Открываем файл
+                try
+                {
+                    GMESHFileStream.IReader contourReader;
+                    if(System.IO.Path.GetExtension(openFileDialog1.FileName) == ".xml")
+                        contourReader = new GMESHFileStream.XMLFile.XMLReader();
+                    else
+                        contourReader = new GMESHFileStream.OBJFile.OBJReaderCont();
+                    IContour cont;
+                    contourReader.read(openFileDialog1.FileName, out cont);
+                    if (cont != null)
+                        buffer.contour = cont;
+                    MESHDisplay.Refresh();
+                }
+                catch
+                {
+                    return;  //добавить еррор окно.
+                }
             }
         }
 
@@ -80,32 +96,6 @@ namespace GMESH_Visualizer
             tryAnaliseMesh();
             updateMeshInfoDataGridSetView();
             this.MESHDisplay.Refresh();
-        }
-
-        private void contourToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All files|*.*";
-            saveFileDialog1.Title = "Save Contour File";
-            saveFileDialog1.ShowDialog();
-
-            if(saveFileDialog1.FileName != "")
-            {
-
-            }
-        }
-
-        private void meshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All files|*.*";
-            saveFileDialog1.Title = "Save Mesh File";
-            saveFileDialog1.ShowDialog();
-
-            if (saveFileDialog1.FileName != "")
-            {
-
-            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -175,13 +165,13 @@ namespace GMESH_Visualizer
                 }
                 buffer.meshGrad = grad / buffer.graph.Length;
                 MeshGradLabel.Text = Convert.ToString(buffer.meshGrad);
-                MESHDisplayDrawContour(sender, e);
                 MESHDisplayDrawPoints(sender, e);
                 MESHDisplayDrawLine(sender, e);
                 MESHDisplayDrawSelectedErrors(sender, e);
                 //в цикл ниже добавить закраску ячеек
                 //считаем качество для всех квадратов. если фигура не квадрат, то её не записываем.
             }
+            MESHDisplayDrawContour(sender, e);
             MESHDisplay.Show();
         }
         private void MESHDisplayDrawPoints(object sender, PaintEventArgs e)
@@ -192,9 +182,9 @@ namespace GMESH_Visualizer
                 {
                     //проверяем наличие данного объекта в списке ошибок по сравнению хеш сумм
                     if (buffer.errors.Exists(t => t.getErrorObjectHesh() == point.GetHashCode()))
-                        e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+                        e.Graphics.DrawEllipse(Pens.Violet, Convert.ToSingle(point.x) - 2, Convert.ToSingle(point.y) - 2, 3, 3);
                     else
-                        e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 6, 6);
+                        e.Graphics.DrawEllipse(Pens.Black, Convert.ToSingle(point.x) - 2, Convert.ToSingle(point.y) - 2, 3, 3);
                 }
         }
         private void MESHDisplayDrawLine(object sender, PaintEventArgs e)
@@ -218,7 +208,7 @@ namespace GMESH_Visualizer
             if (buffer.contour != null)
             {
                 for (int i = 0; i < buffer.contour.getSize(); i++)
-                    e.Graphics.DrawLine(Pens.Blue, Convert.ToSingle(buffer.contour[i].getPoint(0).x), Convert.ToSingle(buffer.contour[i].getPoint(0).y),
+                    e.Graphics.DrawLine(new Pen(Color.Blue,2), Convert.ToSingle(buffer.contour[i].getPoint(0).x), Convert.ToSingle(buffer.contour[i].getPoint(0).y),
                     Convert.ToSingle(buffer.contour[i].getPoint(1).x), Convert.ToSingle(buffer.contour[i].getPoint(1).y));
             }
         }
@@ -236,7 +226,7 @@ namespace GMESH_Visualizer
                 if (selectError.getErrorObjectType() == "point")
                     foreach (IPoint point in buffer.points)
                         if (selectError.getErrorObjectHesh() == point.GetHashCode())
-                            e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 3, Convert.ToSingle(point.y) - 3, 10, 10);
+                            e.Graphics.DrawEllipse(Pens.Red, Convert.ToSingle(point.x) - 2, Convert.ToSingle(point.y) - 2, 7, 7);
             }
         }
         private void MeshInfoDataGridView_RowEnter(object sender, DataGridViewCellEventArgs e)
