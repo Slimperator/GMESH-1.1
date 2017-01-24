@@ -31,7 +31,7 @@ namespace Decompose.Pentagon
                 // Треугольник
                 ICurve c = new Line(points[2], points[0]); 
                 Geometry.Curve.Tools.slittingCurve(contour.lenghtOfPart,c);
-                contours.Add(new Contour(new ICurve[] {contour[0], contour[1], c}));
+                contours.Add(new Contour(new ICurve[] {contour[0], contour[1], c}));  //!!!!!!!!!!!!!!
                 ICurve b = new ReverseCurve(c);
                 // Четырёхугольник
                 contours.Add(new Contour(new ICurve[] {contour[2], contour[3], contour[4], b}));
@@ -40,35 +40,17 @@ namespace Decompose.Pentagon
                 // считаем качество
                 // Треугольник
                 double contourGrade = 0;
-                //TODO: создать конкретные классы для IMeshGenerator
-                IDecompose tria = new Triangle.TriangleDecompose(); // = new TriaMeshGen(10, 10);
-                IMeshGenerator gen = new Generator.Generator();
+
+                IDecompose tria = new Triangle.TriangleDecompose(); 
                 IContour[] conts = tria.decompose(contours[0]);
-                List<AbstractMesh> meshs = new List<AbstractMesh>();
-                for (int z=0;z<conts.Length;z++)
-                {
-                    meshs.Add(gen.generate(conts[z]));
-                }
-                
-
-
-                //TODO: сделать класс ArithmMeanGrade пабликом???
-                for (int z = 0; z < meshs.Count; z++)
-                    contourGrade += new ArithmMeanGrade().calculate(meshs[z]);
-
-                //List<RegMesh2D> meshs = generator.generate(contours[0]);
-                //foreach (RegMesh2D j in meshs)
-                //    contour_grade += new ArithmMeanGrade().Calculate(j);
+                for (int z = 0; z < 3; z++)
+                    contourGrade += new ArithmMeanGrade().calculate(conts[z][0].getPoint(0), conts[z][1].getPoint(0), 
+                        conts[z][2].getPoint(0), conts[z][3].getPoint(0));
 
                 // Четырёхугольник
 
-                //TODO: создать конкретные классы для IMeshGenerator????
-
-                meshs.Add(gen.generate(contours[1]));
-
-                //TODO: сделать класс ArithmMeanGrade пабликом???
-
-                contourGrade += new ArithmMeanGrade().calculate(meshs[3]);
+                contourGrade += new ArithmMeanGrade().calculate(contours[1][0].getPoint(0), contours[1][1].getPoint(0),
+                        contours[1][2].getPoint(0), contours[1][3].getPoint(0));
                 contourGrade = contourGrade/4.0;
 
                 if (contourGrade > bestGrade)

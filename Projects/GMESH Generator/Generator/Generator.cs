@@ -16,6 +16,7 @@ namespace Generator
             int minRows = Math.Min(contour[1].cutPoints.Length, contour[3].cutPoints.Length);          //находим минимум по-бокам
             int minColumns = Math.Min(contour[0].cutPoints.Length, contour[2].cutPoints.Length);        //находим минимум сверху и снизу
             AbstractMesh mesh = new RegMesh2D(minRows, minColumns, 0);
+            double magic = (double)1 / (minRows - 1 );
             IPoint A, B;
             ICurve morphCurve;
             for (int i = 0; i < minColumns; i++)        //заполняем сетку точками верхней границы
@@ -26,7 +27,7 @@ namespace Generator
             {
                 A = contour[3].cutPoints[minRows - i - 1];            //Находим точки на боковых линиях, для их морфирования
                 B = contour[1].cutPoints[i];
-                morphCurve = new Geometry.Curve.Relocate(new Geometry.Curve.Morph(contour[2], contour[0], i / (minRows - 1)), A, B); //находим морфированную кривую.
+                morphCurve = new Geometry.Curve.Relocate(new Geometry.Curve.Morph(contour[2], contour[0], i * magic), A, B); //находим морфированную кривую.
                 Geometry.Curve.Tools.slittingCurve(minColumns, morphCurve);
                 for (int j = 0; j < morphCurve.cutPoints.Length; j++)      //для всех ячеек в строке
                 {

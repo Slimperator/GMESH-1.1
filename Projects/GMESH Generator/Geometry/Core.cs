@@ -8,7 +8,7 @@ namespace Geometry
     public interface IPoint
     {
         double x { get; set; }
-        double y { get; set; }    
+        double y { get; set; }
     }
 
     public interface ICurve
@@ -16,14 +16,15 @@ namespace Geometry
         IPoint[] cutPoints { get; set; }
         double[] cutParams { get; set; } //костыль обыкновенный. править во втором релизе
         IPoint getPoint(double t);
-        double lenght { get; set; } //костыль обыкновенный. для обхода циклической зависимости. править во втором релизе
+        double lenght { get;}
+        List<ICurve> childCurves { get; set; }
     }
 
     public interface IContour
     {
         double lenghtOfPart { get; set; }
         int getSize();
-        ICurve this[int i] { get; }
+        ICurve this[int i] { get; set; }
     }
 
     public abstract class AbstractMesh

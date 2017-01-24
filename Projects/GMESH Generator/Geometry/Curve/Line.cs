@@ -9,9 +9,22 @@ namespace Geometry.Curve
     {
         public IPoint l1 { get; private set; }
         public IPoint l2 { get; private set; }
-        private IPoint[] CutPoints;
+        private IPoint[] CutPoints = new IPoint[0];
         private double Lenght;
-        private double[] CutParams;
+        private double[] CutParams = new double[0];
+        private List<ICurve> childs = new List<ICurve>(); 
+
+        public Line(IPoint l1, IPoint l2)
+        {
+            this.l1 = l1;
+            this.l2 = l2;
+            this.lenght = Math.Round(Tools.length(this), 4);
+        }
+
+        public IPoint getPoint(double t)
+        {
+            return new Point.Point2D((1 - t) * this.l1.x + t * l2.x, (1 - t) * this.l1.y + t * l2.y);
+        }
         public double[] cutParams
         {
             get
@@ -29,7 +42,7 @@ namespace Geometry.Curve
             {
                 return this.Lenght;
             }
-            set
+            private set
             {
                 this.Lenght = value;
             }
@@ -45,15 +58,16 @@ namespace Geometry.Curve
                 this.CutPoints = value;
             }
         }
-        public Line(IPoint l1, IPoint l2)
+        public List<ICurve> childCurves
         {
-            this.l1 = l1;
-            this.l2 = l2;
-
-        }
-        public IPoint getPoint(double t)
-        {
-            return new Point.Point2D((1 - t) * this.l1.x + t * l2.x, (1 - t) * this.l1.y + t * l2.y);
+            get
+            {
+                return this.childs;
+            }
+            set
+            {
+                this.childs = value;
+            }
         }
     }
 }

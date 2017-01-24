@@ -7,9 +7,19 @@ using Geometry.Curve;
 
 namespace Analyzer.Grade
 {
-    public class ArithmMeanGrade:IGrade
+    public class ArithmMeanGrade : IGrade
     {
         public double calculate(Geometry.AbstractMesh mesh)
+        {
+            return CalculateMesh(mesh);
+        }
+
+        public double calculate(IPoint p1, IPoint p2, IPoint p3, IPoint p4)
+        {
+            return CalculateSquare(p1, p2, p3, p4);
+        }
+
+        private double CalculateMesh(Geometry.AbstractMesh mesh)
         {
             List<double> average = new List<double>(); //среднее
 
@@ -43,7 +53,7 @@ namespace Analyzer.Grade
             List<double> a = new List<double>();
             foreach (Line curve in curves)
             {
-                double l = Tools.length(curve);
+                double l = curve.lenght;
                 double round = 1000000000;
                 l = (long)(l * round) / round;
                 a.Add(l);
