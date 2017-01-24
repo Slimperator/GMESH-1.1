@@ -31,8 +31,8 @@ namespace Decompose.Other
                 {
                     bestGrad = t;
                     bestContour = Contours;
-                    contour = reformContour(1, contour);
                 }
+                contour = reformContour(1, contour);
             }
             return bestContour.ToArray();
         }
