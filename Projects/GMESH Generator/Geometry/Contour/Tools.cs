@@ -58,8 +58,17 @@ namespace Geometry.Contour
                         costil = true;
                 }
             }
-            if (costil == true)
+            if (costil == true && result.Count > 3)
                 Curve.Tools.slittingCurve(result[result.Count - 2][1].cutPoints.Length, result[result.Count - 2][3]);
+            /*foreach (IContour c in result)
+            {
+                for (int i = 0; i < c.getSize(); i++)
+                {
+                    ICurve curveTMP = c[i];
+                    Curve.Tools.paramsAndPointsBubleSort(ref curveTMP, false);
+                    c[i] = curveTMP;
+                }
+            }*/
             return result;
         }
         private static void cutContour(ref IContour contour, double partSize)
