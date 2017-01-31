@@ -104,5 +104,37 @@ namespace Geometry.Curve
             }
             return true;
         }
+
+        public static void paramsAndPointsBubleSort(ref ICurve curve, bool reverseFlag)
+        {
+            bool changeFlag = false;
+            double tmpD = 0;
+            IPoint tmpP = null;
+            double[] tmpDoubleArray = curve.cutParams;
+            IPoint[] tmpPointsArray = curve.cutPoints;
+            do
+            {
+                changeFlag = false;
+                for (int i = 1; i < tmpDoubleArray.Length; i++)
+                {
+                    if ((reverseFlag == true && tmpDoubleArray[i] > tmpDoubleArray[i - 1])
+                          ||
+                            (reverseFlag == false && tmpDoubleArray[i] < tmpDoubleArray[i - 1]))
+                    {
+                        changeFlag = true;
+                        //меняем местами параметры
+                        tmpD = tmpDoubleArray[i];
+                        tmpDoubleArray[i] = tmpDoubleArray[i - 1];
+                        tmpDoubleArray[i - 1] = tmpD;
+                        //меняем местами точки
+                        tmpP = tmpPointsArray[i];
+                        tmpPointsArray[i] = tmpPointsArray[i - 1];
+                        tmpPointsArray[i - 1] = tmpP;
+                    }
+                }
+            } while (changeFlag);
+            curve.cutPoints = tmpPointsArray;
+            curve.cutParams = tmpDoubleArray;
+        }
     }
 }
