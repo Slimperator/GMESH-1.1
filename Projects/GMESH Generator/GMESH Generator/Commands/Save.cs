@@ -23,7 +23,7 @@ namespace GMESH_Generator.Commands
             writer.write(storage.PathSave,storage.Meshs);             //сохраняем
             if (storage.AnaliseMesh == true)
             {
-                string path = Path.GetDirectoryName(storage.PathRead) + @"\" + Path.GetFileNameWithoutExtension(storage.PathRead) + "GradAnalize.txt";
+                string path = Path.GetDirectoryName(storage.PathSave) + @"\" + Path.GetFileNameWithoutExtension(storage.PathSave) + "GradAnalize.txt";
                 File.WriteAllText(path, Convert.ToString(storage.MeshsEstimate));
                 /*using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(path, true))
