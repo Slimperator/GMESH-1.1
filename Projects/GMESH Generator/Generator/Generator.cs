@@ -13,8 +13,18 @@ namespace Generator
         }
         public AbstractMesh generate(IContour contour)
         {
+            if (contour[1].cutPoints.Length < contour[3].cutPoints.Length)
+                Geometry.Curve.Tools.slittingCurve(contour[3].cutPoints.Length,contour[1]);
+            if (contour[1].cutPoints.Length > contour[3].cutPoints.Length)
+                Geometry.Curve.Tools.slittingCurve(contour[1].cutPoints.Length, contour[3]);
+            /*if (contour[0].cutPoints.Length < contour[2].cutPoints.Length)
+                Geometry.Curve.Tools.slittingCurve(contour[2].cutPoints.Length, contour[0]);
+            if (contour[0].cutPoints.Length > contour[2].cutPoints.Length)
+                Geometry.Curve.Tools.slittingCurve(contour[0].cutPoints.Length, contour[2]);*/
+            
             int minRows = Math.Min(contour[1].cutPoints.Length, contour[3].cutPoints.Length);          //находим минимум по-бокам
             int minColumns = Math.Min(contour[0].cutPoints.Length, contour[2].cutPoints.Length);        //находим минимум сверху и снизу
+
             AbstractMesh mesh = new RegMesh2D(minRows, minColumns, 0);
             double magic = (double)1 / (minRows - 1 );
             IPoint A, B;
@@ -23,7 +33,7 @@ namespace Generator
             {
                 mesh[0, i] = contour[0].cutPoints[i];
             }
-            for (int i = 1; i < minRows - 1; i++)           //для всех строк, кроме первой и последней
+            for (int i = 0; i < minRows; i++)           //для всех строк, кроме первой и последней
             {
                 A = contour[3].cutPoints[minRows - i - 1];            //Находим точки на боковых линиях, для их морфирования
                 B = contour[1].cutPoints[i];
