@@ -45,10 +45,10 @@ namespace Analitics
 
             foreach (KeyValuePair<int, int> point in pointsRate)
             {
-                if (!(point.Value == 4 || point.Value == 2 || point.Value == 8))
+                if (!(point.Value == 4 || point.Value == 2 || point.Value == 8 || point.Value == 3 || point.Value == 6))
                     errors.Add(new ErrorPoint(1, "wrong point rate", myLittlePoints[point.Key]));
             }
-            
+            /*
             foreach (ICurve i in curvesNeeded)
             {
                 foreach (ICurve j in curvesNeeded)
@@ -60,7 +60,7 @@ namespace Analitics
                         addErrorLineInErrorList(new ErrorCurve(2, "there is INTERSECTION!", j));
                     }
                 }
-            }
+            }*/
             return errors;
         }
         private void addErrorLineInErrorList(IError error)
